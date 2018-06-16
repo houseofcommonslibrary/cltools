@@ -61,6 +61,6 @@ This function is identical to create_and_save_hexjson but reads the data in from
 # Create hexjson from a csv with the default layout
 create_and_save_hexjson("input.csv", "output.hexjson")
 
-# Create hexjson from a csv with the default layout
+# Create hexjson from a csv with the specified layout
 create_and_save_hexjson("input.csv", "output.hexjson", "odd-q")
 ```
