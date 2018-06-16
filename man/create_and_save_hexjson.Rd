@@ -16,8 +16,9 @@ odd-r, even-r, odd-q, even-q.}
 }
 \description{
 Converts a dataframe of codes, names and other data to a hexjson string,
-adding unique column and row coordinates for each hex. The values in the
-first column are used as the key for each hex in the hexjson and therefore
-must be unique. This functioncan be used to produce initial hexjson output
-which can then be edited in a hexjson editor.
+adding unique column and row coordinates for each hex, then saves it to a
+file. The values in the first column are used as the key for each hex in
+the hexjson and therefore must be unique. This functioncan be used to
+produce initial hexjson output which can then be edited in a hexjson
+editor.
 }

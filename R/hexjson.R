@@ -71,10 +71,11 @@ create_hexjson <- function(data, layout = "odd-r") {
 #' Convert tabular data to hexjson and save it to a file
 #'
 #' Converts a dataframe of codes, names and other data to a hexjson string,
-#' adding unique column and row coordinates for each hex. The values in the
-#' first column are used as the key for each hex in the hexjson and therefore
-#' must be unique. This functioncan be used to produce initial hexjson output
-#' which can then be edited in a hexjson editor.
+#' adding unique column and row coordinates for each hex, then saves it to a
+#' file. The values in the first column are used as the key for each hex in
+#' the hexjson and therefore must be unique. This functioncan be used to
+#' produce initial hexjson output which can then be edited in a hexjson
+#' editor.
 #'
 #' @param data A dataframe of labels and data to store in each hex.
 #' @param filename The name of an output file for the hexjson.
@@ -90,10 +91,10 @@ create_and_save_hexjson <- function(data, filename, layout = "odd-r") {
 #' Convert a csv of tabular data to hexjson and save it to a file
 #'
 #' Converts a csv of codes, names and other data to a hexjson string, adding
-#' unique column and row coordinates for each hex. The values in the first
-#' column are used as the key for each hex in the hexjson and therefore must
-#' be unique. This function can be used to produce initial hexjson output
-#' which can then be edited in a hexjson editor.
+#' unique column and row coordinates for each hex, then saves it to a file.
+#' The values in the first column are used as the key for each hex in the
+#' hexjson and therefore must be unique. This function can be used to produce
+#' initial hexjson output which can then be edited in a hexjson editor.
 #'
 #' @param csv_name The name of a csv file of data to store in each hex.
 #' @param hexjson_name The name of an output file for the hexjson.
