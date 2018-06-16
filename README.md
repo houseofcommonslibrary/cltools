@@ -43,7 +43,7 @@ hexjson <- create_hexjson(data, "odd-q")
 
 #### create_and_save_hexjson(data, filename, layout = "odd-r") 
 
-This function is identical to create_hexjson but also saves the hexjson string to a file.
+This function is identical to `create_hexjson` but also saves the hexjson string to a file.
 
 ``` r
 # Create and save hexjson with the default layout
@@ -55,7 +55,7 @@ create_and_save_hexjson(data, "output.hexjson", "odd-q")
 
 #### create_hexjson_from_csv(csv_file, hexjson_file, layout = "odd-r")
 
-This function is identical to create_and_save_hexjson but reads the data in from the given csv.
+This function is identical to `create_and_save_hexjson` but reads the data in from the given csv.
 
 ``` r
 # Create hexjson from a csv with the default layout
