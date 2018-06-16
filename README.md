@@ -23,7 +23,7 @@ A [hexjson editor] can be used to position the hexes and design the hexmap, whic
 
 [hexjson editor]: <https://olihawkins.com/project/hexjson-editor/>
 
-##### create_hexjson(data, layout = "odd-r")
+#### create_hexjson(data, layout = "odd-r")
 
 Converts a dataframe of codes, names and other data to a hexjson string, adding unique column and row coordinates for each hex. The values in the first column are used as the key for each hex in the hexjson and therefore must be unique.
 
@@ -41,7 +41,7 @@ hexjson <- create_hexjson(data)
 hexjson <- create_hexjson(data, "odd-q")
 ```
 
-##### create_and_save_hexjson(data, filename, layout = "odd-r") 
+#### create_and_save_hexjson(data, filename, layout = "odd-r") 
 
 This function is identical to create_hexjson but also saves the hexjson string to a file.
 
@@ -53,7 +53,7 @@ create_and_save_hexjson(data, "output.hexjson")
 create_and_save_hexjson(data, "output.hexjson", "odd-q")
 ```
 
-##### create_hexjson_from_csv(csv_file, hexjson_file, layout = "odd-r")
+#### create_hexjson_from_csv(csv_file, hexjson_file, layout = "odd-r")
 
 This function is identical to create_and_save_hexjson but reads the data in from the given csv.
 
