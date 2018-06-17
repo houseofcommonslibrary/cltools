@@ -13,7 +13,7 @@ devtools::install_github("olihawkins/cltools")
 
 ## HexJSON functions
 
-These functions are used to produce initial hexjson data for a hexmap of geographic areas. The hexjson data generated from these functions can then be editied in a [hexjson editor].
+These functions are used to produce initial hexjson data for a hexmap of geographic areas. The hexjson data generated from these functions can then be edited in a [hexjson editor].
 
 These functions take tabular data for a collection of geographic areas and convert it to a set of hexes represented as hexjson, assigning unique grid coordinates to each hex. Data may be provided in the form of a dataframe, tibble or csv. 
 
@@ -23,9 +23,7 @@ A [hexjson editor] can be used to position the hexes and design the hexmap, whic
 
 [hexjson editor]: <https://olihawkins.com/project/hexjson-editor/>
 
-#### create_hexjson(data, layout = "odd-r")
-
-Converts a dataframe of codes, names and other data to a hexjson string, adding unique column and row coordinates for each hex. The values in the first column are used as the key for each hex in the hexjson and therefore must be unique.
+`create_hexjson` converts a dataframe of codes, names and other data to a hexjson string, adding unique column and row coordinates for each hex. The values in the first column are used as the key for each hex in the hexjson and therefore must be unique.
 
 ``` r
 # Some example data
@@ -41,9 +39,7 @@ hexjson <- create_hexjson(data)
 hexjson <- create_hexjson(data, "odd-q")
 ```
 
-#### create_and_save_hexjson(data, filename, layout = "odd-r") 
-
-This function is identical to `create_hexjson` but also saves the hexjson string to a file.
+`create_and_save_hexjson` is identical to `create_hexjson` but also saves the hexjson string to a file.
 
 ``` r
 # Create and save hexjson with the default layout
@@ -53,9 +49,7 @@ create_and_save_hexjson(data, "output.hexjson")
 create_and_save_hexjson(data, "output.hexjson", "odd-q")
 ```
 
-#### create_hexjson_from_csv(csv_file, hexjson_file, layout = "odd-r")
-
-This function is identical to `create_and_save_hexjson` but reads the data in from the given csv.
+`create_hexjson_from_csv` is identical to `create_and_save_hexjson` but reads the data in from the given csv.
 
 ``` r
 # Create hexjson from a csv with the default layout
