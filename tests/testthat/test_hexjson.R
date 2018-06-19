@@ -1,4 +1,4 @@
-context("HexJSON functions")
+context("HexJSON")
 
 # Setup ----------------------------------------------------------------------
 

@@ -37,13 +37,14 @@ get_hex_string <- function(...) {
 #' @param layout The coordinate layout of the hexsjon. Must be one of:
 #'   odd-r, even-r, odd-q, even-q.
 #' @return A hexjson string
+#' @export
 #'
 create_hexjson <- function(data, layout = "odd-r") {
 
     layouts <- c("odd-r", "even-r", "odd-q", "even-q")
     layouts_str <- paste(layouts, collapse = ", ")
 
-    if (!(layout %in% layouts)) stop(
+    if (! (layout %in% layouts)) stop(
         stringr::str_interp("\"${layout}\" is not a valid layout."))
 
     if (length(data[[1]]) != length(unique(data[[1]]))) stop(paste(
@@ -73,7 +74,7 @@ create_hexjson <- function(data, layout = "odd-r") {
 #' Converts a dataframe of codes, names and other data to a hexjson string,
 #' adding unique column and row coordinates for each hex, then saves it to a
 #' file. The values in the first column are used as the key for each hex in
-#' the hexjson and therefore must be unique. This functioncan be used to
+#' the hexjson and therefore must be unique. This function can be used to
 #' produce initial hexjson output which can then be edited in a hexjson
 #' editor.
 #'
@@ -81,6 +82,7 @@ create_hexjson <- function(data, layout = "odd-r") {
 #' @param filename The name of an output file for the hexjson.
 #' @param layout The coordinate layout of the hexsjon. Must be one of:
 #'   odd-r, even-r, odd-q, even-q.
+#' @export
 #'
 create_and_save_hexjson <- function(data, filename, layout = "odd-r") {
 
@@ -100,6 +102,7 @@ create_and_save_hexjson <- function(data, filename, layout = "odd-r") {
 #' @param hexjson_name The name of an output file for the hexjson.
 #' @param layout The coordinate layout of the hexsjon. Must be one of:
 #'   odd-r, even-r, odd-q, even-q.
+#' @export
 #'
 create_hexjson_from_csv <- function(csv_file, hexjson_file, layout = "odd-r") {
 
