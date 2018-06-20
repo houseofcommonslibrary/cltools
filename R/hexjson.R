@@ -104,7 +104,8 @@ create_and_save_hexjson <- function(data, filename, layout = "odd-r") {
 #'   odd-r, even-r, odd-q, even-q.
 #' @export
 #'
-create_hexjson_from_csv <- function(csv_file, hexjson_file, layout = "odd-r") {
+create_hexjson_from_csv <- function(
+    csv_file, hexjson_file, layout = "odd-r") {
 
     data <- readr::read_csv(csv_file, col_types = readr::cols())
     create_and_save_hexjson(data, hexjson_file, layout)

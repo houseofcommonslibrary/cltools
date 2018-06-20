@@ -4,26 +4,26 @@
 \alias{get_row_percent}
 \title{Calculate row percentages for a set of columns in a dataframe}
 \usage{
-get_row_percent(data, from = 2, to = NULL)
+get_row_percent(data, from = 2, to = ncol(data))
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as row percentages.}
 
-\item{from}{The index of the column from which row percentages will
-be calculated. The default is 2, assuming one column for row labels.
+\item{from}{The index of the column from which row percentages are
+calculated. The default is 2, assuming one column for row labels.
 Use 1 if there are no preceding data columns.}
 
-\item{to}{The index of the column to which row percentages will be
-calculated. The default is NULL, which means row percentages will be
-calculated across all remaining columms in the dataframe.}
+\item{to}{The index of the column to which row percentages are calculated.
+The default is ncol(data), which means row percentages are calculated
+across all remaining columms in the dataframe.}
 }
 \value{
-A tibble containing the row percentages and any preceding columns.
+A tibble containing row percentages and any preceding columns.
 }
 \description{
-Calculates row percentages for a set of colummns in a dataframe and returns
-those percentages along with any columns containing row labels or other
-preceding data. Use \code{add_row_percent} to append the row
-percentages to the input dataframe.
+Calculates row percentages for a set of columns in a dataframe and returns
+those percentages along with any preceding columns containing row labels or
+other data. Use \code{add_row_percent} to append the row percentages to the
+input dataframe.
 }

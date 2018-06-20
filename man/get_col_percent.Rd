@@ -4,26 +4,26 @@
 \alias{get_col_percent}
 \title{Calculate column percentages for a set of columns in a dataframe}
 \usage{
-get_col_percent(data, from = 2, to = NULL)
+get_col_percent(data, from = 2, to = ncol(data))
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as column percentages.}
 
-\item{from}{The index of the column from which column percentages will
-be calculated. The default is 2, assuming one column for row labels.
-Use 1 if there are no preceding data columns.}
+\item{from}{The index of the column from which column percentages are
+calculated. The default is 2, assuming one column for row labels. Use 1
+if there are no preceding data columns.}
 
-\item{to}{The index of the column to which column percentages will be
-calculated. The default is NULL, which means column percentages will be
+\item{to}{The index of the column to which column percentages are
+calculated. The default is ncol(data), which means column percentages are
 calculated across all remaining columms in the dataframe.}
 }
 \value{
-A tibble containing the column percentages and any preceding columns.
+A tibble containing column percentages and any preceding columns.
 }
 \description{
-Calculates column percentages for a set of colummns in a dataframe and returns
-those percentages along with any columns containing row labels or other
-preceding data. Use \code{add_col_percent} to append the column
+Calculates column percentages for a set of colummns in a dataframe and
+returns those percentages along with any preceding columns containing row
+labels or other data. Use \code{add_col_percent} to append the column
 percentages to the input dataframe.
 }

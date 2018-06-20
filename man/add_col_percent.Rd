@@ -5,19 +5,19 @@
 \title{Calculate column percentages for a set of columns in a dataframe and add
 them to the dataframe}
 \usage{
-add_col_percent(data, from = 2, to = NULL, prefix = "pc_")
+add_col_percent(data, from = 2, to = ncol(data), prefix = "pc_")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as column percentages.}
 
-\item{from}{The index of the column from which column percentages will
-be calculated. The default is 2, assuming one column for row labels.
+\item{from}{The index of the column from which column percentages are
+calculated. The default is 2, assuming one column for row labels.
 Use 1 if there are no preceding data columns.}
 
-\item{to}{The index of the column to which column percentages will be
-calculated. The default is NULL, which means column percentages will be
-calculated across all remaining columms in the dataframe.}
+\item{to}{The index of the column to which column percentages are
+calculated. The default is ncol(data), which means column percentages
+are calculated across all remaining columms in the dataframe.}
 
 \item{prefix}{A string prefix to add to the column names to identify their
 percentage equivalents. The default is "pc_"}
