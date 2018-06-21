@@ -2,7 +2,7 @@
 
 A collection of data wrangling tools for statistical researchers. This package is principally designed for use by researchers in the House of Commons Library but may be useful to anyone using R for routine data analysis. The package provides functions for manipulating tabular data stored in dataframes.
 
-This package is in active development and I would welcome any feedback. Documentation and unit tests are being added with each new set of functions. I cannot currently guarantee there will be no breaking changes as the package may evolve to reflect feedback from users.
+This package is in active development and I would welcome any feedback. Documentation and unit tests are being added with each new set of functions. I cannot currently guarantee there will be no breaking changes to the API as the package may evolve to reflect feedback from users.
 
 ## Installation
 
@@ -13,9 +13,14 @@ install.packages("devtools")
 devtools::install_github("olihawkins/cltools")
 ```
 
-## Row and column totals
+## Contents
 
-Functions for row and column totals provide a convenient way to create and add row and column totals for data stored in columns in a dataframe. `get_row_totals` sums the data in a set of columns containing numerical data, specified with the `from` and `to` arguments. By default the function assumes that all the columns are to be summed except for the first column.
+* [Row and column totals](https://github.com/olihawkins/cltools#row-and-column-totals)
+* [Row and column percentages](https://github.com/olihawkins/cltools#row-and-column-percentages)
+
+### Row and column totals
+
+Functions for row and column totals provide a convenient way to create and add row and column totals for data stored in columns in a dataframe. `get_row_totals` sums the data in a set of columns containing numerical data. The target columns are specified with the `from` and `to` arguments. By default the function assumes that all columns other than the first column are to be summed.
 
 ``` r
 data <- tibble::tibble(
@@ -34,7 +39,7 @@ get_row_totals(data, from = 2, to = 3)
 # [1]  7  9 11 13 15
 ```
 
-The row totals can be added to the input dataframe with `add_row_totals`. You can provide an alternative column name for the row totals with the `label` argument.
+Row totals can be added to the input dataframe with `add_row_totals`. You can provide an alternative column name for the row totals with the `label` argument.
 
 ``` r
 add_row_totals(data)
@@ -58,7 +63,7 @@ add_row_totals(data, label = "all")
 # 5 E         5    10    15    30
 ```
 
-The equivalent functions `get_col_totals` and `add_col_totals` produce similar results for column totals but with some differences, which reflect the different behaviour of rows and columns in dataframes. The vector returned from `get_col_totals` is named with the column labels.
+The equivalent functions `get_col_totals` and `add_col_totals` produce similar results for column totals but with some differences, which reflect the different behaviour of rows and columns in dataframes. For instance, the vector returned from `get_col_totals` is named with the column labels.
 
 ``` r
 get_col_totals(data)
@@ -66,7 +71,7 @@ get_col_totals(data)
 # 15 40 65 
 ```
 
-When adding column totals with `add_col_totals`, NAs are appended to all columns that are not being summed. However, label columns can be specified so that a label can be included in the totals row. By default, the function will try to add a label to the first column, if possible.
+When adding column totals to a dataframe with `add_col_totals`, NAs are used for all columns that are not being summed. However, label columns can be specified so that a label can be used for the row of totals. By default, the function will try to add a label to the first column of the dataframe, if possible.
 
 ``` r
 add_col_totals(data)
@@ -81,7 +86,7 @@ add_col_totals(data)
 # 6 total    15    40    65
 ```
 
-The `lcols` argument can be used to specify which label columns should receive the label for totals. 
+The `lcols` argument can be used to specify which columns should receive a label for totals. 
 
 ``` r
 data <- tibble::tibble(
@@ -103,7 +108,7 @@ add_col_totals(data, from = 3, lcols = c(1, 2))
 # 6 total total    15    40    65
 ```
 
-If the column indices specified with `lcols` are invalid for any reason they are silently ignored. Similarly, setting `lcols` to `NULL` will stop the function attempting to include a label in the new row.
+If the column indices specified with `lcols` are invalid for any reason they are silently ignored. Similarly, setting `lcols` to `NULL` will stop the function attempting to include any labels in the new row.
 
 ``` r
 add_col_totals(data, from = 3, lcols = NULL)
@@ -133,9 +138,11 @@ add_col_totals(data, from = 3, label = "all", lcols = c(1, 2))
 # 6 all   all      15    40    65
 ```
 
-## Row and column percentages
+Adding column totals to a dataframe is not very "tidy", but may be useful as a final step before outputting tabular data for presentation.
 
-Functions for row and column percentages provide a convenient way to create and add row and column percentages for data stored in columns in a dataframe. These functions have a similar interface to the functions for row and column totals. The principal difference is that `get_row_percent` and `get_col_percent` return the target columns as percentages **along with** any preceding data columns.
+### Row and column percentages
+
+Functions for row and column percentages provide a convenient way to create and add row and column percentages for data stored in columns in a dataframe. These functions have a similar interface to the functions for row and column totals. The principal difference is that `get_row_percent` and `get_col_percent` return the target columns as percentages **as well as** any preceding data columns, which may be labels.
 
 ``` r
 data <- tibble::tibble(
@@ -199,6 +206,18 @@ get_col_percent(data, to = 3)
 
 ```
 
+If you just want the percentages, remove any preceding columns from the input and target all columns from the first.
+
+``` r
+get_row_percent(data[c(-1)], from = 1)
+# # A tibble: 3 x 3
+#       b     c     d
+#   <dbl> <dbl> <dbl>
+# 1  0.25  0.25   0.5
+# 2  0.25  0.25   0.5
+# 3  0.25  0.25   0.5
+```
+
 Row and column percentages can be added to the input dataframe using `add_row_percent` and `add_col_percent`. These functions perform identical calculations to `get_row_percent` and `get_col_percent` but they return the full input dataframe with the percentage columns added.
 
 ``` r
@@ -258,49 +277,4 @@ add_row_percent(data, prefix = "percent_")
 # 3 C         3     3     6      0.25      0.25       0.5
 ```
 
-## HexJSON
-
-These functions are used to produce initial hexjson data for a hexmap of geographic areas. The hexjson data generated from these functions can then be edited in a [hexjson editor].
-
-These functions take tabular data for a collection of geographic areas and convert it to a set of hexes represented as hexjson, assigning unique grid coordinates to each hex. Data may be provided in the form of a dataframe, tibble or csv. 
-
-The tabular data may contain codes, names, and categorical or numerical values for each area to be mapped. However, it is assumed that the first column of the table contains data that uniquely idenitfies each area, and which functions as the key for each area within the hexjson object. The remaining columns may contain any values that can be validly represented as json.
-
-A [hexjson editor] can be used to position the hexes and design the hexmap, which can then be exported as either hexjson or geojson.
-
-[hexjson editor]: <https://olihawkins.com/project/hexjson-editor/>
-
-`create_hexjson` converts a dataframe of codes, names and other data to a hexjson string, adding unique column and row coordinates for each hex. The values in the first column are used as the key for each hex in the hexjson and therefore must be unique.
-
-``` r
-data <- tibble::tibble(
-    name = letters[1:25],
-    group = rep(letters[1:5], rep(5, 5)),
-    value = 1:25)
-
-# Create hexjson with the default layout
-hexjson <- create_hexjson(data)
-
-# Create hexjson with the specified layout
-hexjson <- create_hexjson(data, "odd-q")
-```
-
-`create_and_save_hexjson` is identical to `create_hexjson` but also saves the hexjson string to a file.
-
-``` r
-# Create and save hexjson with the default layout
-create_and_save_hexjson(data, "output.hexjson")
-
-# Create and save hexjson with the specifed layout
-create_and_save_hexjson(data, "output.hexjson", "odd-q")
-```
-
-`create_hexjson_from_csv` is identical to `create_and_save_hexjson` but reads the data in from the given csv.
-
-``` r
-# Create hexjson from a csv with the default layout
-create_and_save_hexjson("input.csv", "output.hexjson")
-
-# Create hexjson from a csv with the specified layout
-create_and_save_hexjson("input.csv", "output.hexjson", "odd-q")
-```
+If a row or column sums to zero, the percentages calculated for that row or column will be NA. Similarly, if any of the values used to calculate a row or column of percentages is NA, all the percentages returned for that row or column will be NA.
