@@ -6,10 +6,10 @@
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by row.
-#' @param from The index of the column from which row totals are calculated.
+#' @param from The number of the column from which row totals are calculated.
 #'   The default is 2, assuming one column for row labels. Use 1 if there are
 #'   no preceding data columns.
-#' @param to The index of the column to which row totals are calculated. The
+#' @param to The number of the column to which row totals are calculated. The
 #'   default is ncol(data), which means row totals are calculated across all
 #'   remaining columms in the dataframe.
 #' @return A numeric vetor of row totals
@@ -32,10 +32,10 @@ get_row_totals <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by row.
-#' @param from The index of the column from which row totals are calculated.
+#' @param from The number of the column from which row totals are calculated.
 #'   The default is 2, assuming one column for row labels. Use 1 if there are
 #'   no preceding data columns.
-#' @param to The index of the column to which row totals are calculated. The
+#' @param to The number of the column to which row totals are calculated. The
 #'   default is ncol(data), which means row totals are calculated across all
 #'   remaining columms in the dataframe.
 #' @param label The label for the totals column. The default is "total".
@@ -56,10 +56,10 @@ add_row_totals <- function(data, from = 2, to = ncol(data), label = "total") {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by column.
-#' @param from The index of the column from which column totals are
+#' @param from The number of the column from which column totals are
 #'   calculated. The default is 2, assuming one column for row labels. Use 1
 #'   if there are no preceding data columns.
-#' @param to The index of the column to which column totals are calculated.
+#' @param to The number of the column to which column totals are calculated.
 #'   The default is ncol(data), which means column totals are calculated
 #'   across all remaining columms in the dataframe.
 #' @return A numeric vetor of column totals
@@ -85,10 +85,10 @@ get_col_totals <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by column.
-#' @param from The index of the column from which column totals are
+#' @param from The number of the column from which column totals are
 #'   calculated. The default is 2, assuming one column for row labels. Use 1
 #'   if there are no preceding data columns.
-#' @param to The index of the column to which column totals are calculated.
+#' @param to The number of the column to which column totals are calculated.
 #'   The default is ncol(data), which means column totals are calculated for
 #'   all remaining columms in the dataframe.
 #' @param label The label for the totals row. The default is "total".
@@ -100,8 +100,11 @@ get_col_totals <- function(data, from = 2, to = ncol(data)) {
 #'   column totals.
 #' @export
 #'
-add_col_totals <- function(
-    data, from = 2, to = ncol(data), label = "total", lcols = 1) {
+add_col_totals <- function(data,
+                           from = 2,
+                           to = ncol(data),
+                           label = "total",
+                           lcols = 1) {
 
     # Get the column totals as a list for a totals row
     ct_row <- as.list(get_col_totals(data, from, to))

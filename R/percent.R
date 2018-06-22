@@ -7,10 +7,10 @@
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as row percentages.
-#' @param from The index of the column from which row percentages are
+#' @param from The number of the column from which row percentages are
 #'   calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The index of the column to which row percentages are calculated.
+#' @param to The number of the column to which row percentages are calculated.
 #'   The default is ncol(data), which means row percentages are calculated
 #'   across all remaining columms in the dataframe.
 #' @return A tibble containing row percentages and any preceding columns.
@@ -41,10 +41,10 @@ get_row_percent <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as row percentages.
-#' @param from The index of the column from which row percentages are
+#' @param from The number of the column from which row percentages are
 #'   calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The index of the column to which row percentages are calculated.
+#' @param to The number of the column to which row percentages are calculated.
 #'   The default is ncol(data), which means row percentages are calculated
 #'   across all remaining columms in the dataframe.
 #' @param prefix A string prefix to add to the column names to identify their
@@ -82,10 +82,10 @@ add_row_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as column percentages.
-#' @param from The index of the column from which column percentages are
+#' @param from The number of the column from which column percentages are
 #'   calculated. The default is 2, assuming one column for row labels. Use 1
 #'   if there are no preceding data columns.
-#' @param to The index of the column to which column percentages are
+#' @param to The number of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages are
 #'   calculated across all remaining columms in the dataframe.
 #' @return A tibble containing column percentages and any preceding columns.
@@ -116,10 +116,10 @@ get_col_percent <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as column percentages.
-#' @param from The index of the column from which column percentages are
+#' @param from The number of the column from which column percentages are
 #'   calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The index of the column to which column percentages are
+#' @param to The number of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages
 #'   are calculated across all remaining columms in the dataframe.
 #' @param prefix A string prefix to add to the column names to identify their
@@ -146,23 +146,4 @@ add_col_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
 
     # Bind the percentage columns and return
     dplyr::bind_cols(data, cp)
-}
-
-#' Validate column arguments for row and column percentages and totals
-#'
-#' @param data A dataframe containing columns of numerical data for analysis.
-#' @param from The index of the column from which data is processed.
-#' @param to The index of the column to which data is processed.
-#' @keywords internal
-valid_columns <- function(data, from, to) {
-
-    # Check column indices are sane
-    if (from < 1 || to > ncol(data) || from > to) stop(
-        "The given column numbers are not valid.")
-
-    # Check columns are numeric
-    if (! all(purrr::map_lgl(data[from:to], is.numeric))) stop (
-        "The given columns are not all numeric.")
-
-    TRUE
 }
