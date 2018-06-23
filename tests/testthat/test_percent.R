@@ -19,6 +19,18 @@ data_col <- tibble::tibble(
 
 # Tests: get_row_percent -----------------------------------------------------
 
+test_that("get_row_percent rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(get_row_percent(NULL), msg)
+    expect_error(get_row_percent(c()), msg)
+    expect_error(get_row_percent(c(NA, NA, NA)), msg)
+    expect_error(get_row_percent(c("a", "b", "c")), msg)
+    expect_error(get_row_percent(c(1, 2, 3)), msg)
+    expect_error(get_row_percent(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(get_row_percent(list(a = c(1,2,3))), msg)
+})
+
 test_that("get_row_percent rejects invalid column numbers", {
 
     msg <- "The given column numbers are not valid."
@@ -78,6 +90,18 @@ test_that("get_row_percent returns correct data with fewer data columns", {
 })
 
 # Tests: add_row_percent -----------------------------------------------------
+
+test_that("add_row_percent rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(add_row_percent(NULL), msg)
+    expect_error(add_row_percent(c()), msg)
+    expect_error(add_row_percent(c(NA, NA, NA)), msg)
+    expect_error(add_row_percent(c("a", "b", "c")), msg)
+    expect_error(add_row_percent(c(1, 2, 3)), msg)
+    expect_error(add_row_percent(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(add_row_percent(list(a = c(1,2,3))), msg)
+})
 
 test_that("add_row_percent rejects invalid column numbers", {
 
@@ -184,6 +208,18 @@ test_that("add_row_percent returns correct data with a different prefix", {
 
 # Tests: get_col_percent -----------------------------------------------------
 
+test_that("get_col_percent rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(get_col_percent(NULL), msg)
+    expect_error(get_col_percent(c()), msg)
+    expect_error(get_col_percent(c(NA, NA, NA)), msg)
+    expect_error(get_col_percent(c("a", "b", "c")), msg)
+    expect_error(get_col_percent(c(1, 2, 3)), msg)
+    expect_error(get_col_percent(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(get_col_percent(list(a = c(1,2,3))), msg)
+})
+
 test_that("get_col_percent rejects invalid column numbers", {
 
     msg <- "The given column numbers are not valid."
@@ -245,6 +281,18 @@ test_that("get_col_percent returns correct data with fewer data columns", {
 })
 
 # Tests: add_col_percent -----------------------------------------------------
+
+test_that("add_col_percent rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(add_col_percent(NULL), msg)
+    expect_error(add_col_percent(c()), msg)
+    expect_error(add_col_percent(c(NA, NA, NA)), msg)
+    expect_error(add_col_percent(c("a", "b", "c")), msg)
+    expect_error(add_col_percent(c(1, 2, 3)), msg)
+    expect_error(add_col_percent(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(add_col_percent(list(a = c(1,2,3))), msg)
+})
 
 test_that("add_row_percent rejects invalid column numbers", {
 

@@ -17,6 +17,9 @@
 #'
 get_row_totals <- function(data, from = 2, to = ncol(data)) {
 
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
+
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()
 
@@ -66,6 +69,9 @@ add_row_totals <- function(data, from = 2, to = ncol(data), label = "total") {
 #' @export
 #'
 get_col_totals <- function(data, from = 2, to = ncol(data)) {
+
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
 
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()

@@ -18,6 +18,9 @@
 #'
 get_row_percent <- function(data, from = 2, to = ncol(data)) {
 
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
+
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()
 
@@ -54,6 +57,9 @@ get_row_percent <- function(data, from = 2, to = ncol(data)) {
 #' @export
 #'
 add_row_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
+
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
 
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()
@@ -93,6 +99,9 @@ add_row_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
 #'
 get_col_percent <- function(data, from = 2, to = ncol(data)) {
 
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
+
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()
 
@@ -129,6 +138,9 @@ get_col_percent <- function(data, from = 2, to = ncol(data)) {
 #' @export
 #'
 add_col_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
+
+    # Check data is a dataframe
+    if (! valid_df(data)) stop()
 
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()

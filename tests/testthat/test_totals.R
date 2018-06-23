@@ -10,6 +10,18 @@ data <- tibble::tibble(
 
 # Tests: get_row_totals ------------------------------------------------------
 
+test_that("get_row_totals rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(get_row_totals(NULL), msg)
+    expect_error(get_row_totals(c()), msg)
+    expect_error(get_row_totals(c(NA, NA, NA)), msg)
+    expect_error(get_row_totals(c("a", "b", "c")), msg)
+    expect_error(get_row_totals(c(1, 2, 3)), msg)
+    expect_error(get_row_totals(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(get_row_totals(list(a = c(1,2,3))), msg)
+})
+
 test_that("get_row_totals rejects invalid column numbers", {
 
     msg <- "The given column numbers are not valid."
@@ -53,6 +65,18 @@ test_that("get_row_totals returns correct data with fewer data columns", {
 })
 
 # Tests: add_row_totals ------------------------------------------------------
+
+test_that("add_row_totals rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(add_row_totals(NULL), msg)
+    expect_error(add_row_totals(c()), msg)
+    expect_error(add_row_totals(c(NA, NA, NA)), msg)
+    expect_error(add_row_totals(c("a", "b", "c")), msg)
+    expect_error(add_row_totals(c(1, 2, 3)), msg)
+    expect_error(add_row_totals(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(add_row_totals(list(a = c(1,2,3))), msg)
+})
 
 test_that("add_row_totals rejects invalid column numbers", {
 
@@ -128,6 +152,18 @@ test_that("add_row_totals returns correct data with fewer data columns", {
 
 # Tests: get_col_totals ------------------------------------------------------
 
+test_that("get_col_totals rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(get_col_totals(NULL), msg)
+    expect_error(get_col_totals(c()), msg)
+    expect_error(get_col_totals(c(NA, NA, NA)), msg)
+    expect_error(get_col_totals(c("a", "b", "c")), msg)
+    expect_error(get_col_totals(c(1, 2, 3)), msg)
+    expect_error(get_col_totals(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(get_col_totals(list(a = c(1,2,3))), msg)
+})
+
 test_that("get_col_totals rejects invalid column numbers", {
 
     msg <- "The given column numbers are not valid."
@@ -171,6 +207,18 @@ test_that("get_col_totals returns correct data with fewer data columns", {
 })
 
 # Tests: add_col_totals ------------------------------------------------------
+
+test_that("add_col_totals rejects data that is not a dataframe", {
+
+    msg <- "The data is not a dataframe."
+    expect_error(add_col_totals(NULL), msg)
+    expect_error(add_col_totals(c()), msg)
+    expect_error(add_col_totals(c(NA, NA, NA)), msg)
+    expect_error(add_col_totals(c("a", "b", "c")), msg)
+    expect_error(add_col_totals(c(1, 2, 3)), msg)
+    expect_error(add_col_totals(c(TRUE, TRUE, FALSE)), msg)
+    expect_error(add_col_totals(list(a = c(1,2,3))), msg)
+})
 
 test_that("add_col_totals rejects invalid column numbers", {
 
