@@ -3,7 +3,7 @@
 \name{get_row_percent_dfr}
 \alias{get_row_percent_dfr}
 \title{Calculate row percentages for a set of columns in a dataframe without
-validatiion}
+validation}
 \usage{
 get_row_percent_dfr(data, from = 2, to = ncol(data))
 }

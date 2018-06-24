@@ -12,12 +12,12 @@ get_indices(data, from = 2, to = ncol(data), start = 100, baserow = 1,
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as indices.}
 
-\item{from}{The number of the column from which indices are calculated.
-The default is 2, assuming one column for row labels. Use 1 if there are
-no preceding data columns.}
+\item{from}{The number or name of the column from which indices are
+calculated. The default is 2, assuming one column for row labels. Use 1
+if there are no preceding data columns.}
 
-\item{to}{The number of the column to which indices are calculated. The
-default is ncol(data), which means indices are calculated across all
+\item{to}{The number or name of the column to which indices are calculated.
+The default is ncol(data), which means indices are calculated across all
 remaining columms in the dataframe.}
 
 \item{start}{The starting value for the baseline. The default is 100.
@@ -28,9 +28,10 @@ default is 1. The baseline row must contain no zero values. This argument
 is ignored if base values are set explcitly with \code{basevals}.}
 
 \item{basevals}{Specifies the values to use for the baseline explicitly.
-Use this if the baseline values to be used are not represented any given
-row. The default is NULL, which means the function will use the values
-in the \code{baserow} instead. The baseline values must contain no zeros.}
+Use this if the baseline values to be used are not represented in any
+given row. The default is NULL, which means the function will use the
+values in the \code{baserow} instead. The baseline values must not
+contain zeros.}
 }
 \value{
 A tibble containing indices and any preceding columns.

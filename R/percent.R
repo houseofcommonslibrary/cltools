@@ -1,5 +1,5 @@
 #' Calculate row percentages for a set of columns in a dataframe without
-#' validatiion
+#' validation
 #'
 #' This is the raw version of \code{get_row_percent}. It should only be used
 #' internally within the package inside functions which provide validation.
@@ -100,7 +100,7 @@ add_row_percent <- function(data,
 }
 
 #' Calculate column percentages for a set of columns in a dataframe without
-#' validatiion
+#' validation
 #'
 #' This is the raw version of \code{get_col_percent}. It should only be used
 #' internally within the package inside functions which provide validation.
