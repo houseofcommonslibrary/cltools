@@ -20,6 +20,10 @@ run_dfr_func <- function(f, data, from, to, ...) {
     # Check data is a dataframe
     if (! valid_df(data)) stop()
 
+    # Convert column names to numbers if necessary
+    if (is.character(from)) from <- get_col_num(data, from)
+    if (is.character(to)) to <- get_col_num(data, to)
+
     # Check columns are valid
     if (! valid_columns(data, from, to)) stop()
 
@@ -67,8 +71,8 @@ valid_columns <- function(data, from, to) {
 #'
 #' @param data A dataframe.
 #' @param name A column name as a string.
-#' @return The column number for the column with the given name or zero if the
-#'   column name is not found.
+#' @return The column number for the column with the given name, or zero if
+#'   the column name is not found.
 #' @keywords internal
 #'
 get_col_num <- function(data, name) {

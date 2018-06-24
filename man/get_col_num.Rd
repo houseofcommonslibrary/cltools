@@ -12,8 +12,8 @@ get_col_num(data, name)
 \item{name}{A column name as a string.}
 }
 \value{
-The column number for the column with the given name or zero if the
-  column name is not found.
+The column number for the column with the given name, or zero if
+  the column name is not found.
 }
 \description{
 Get the column number for a column in a dataframe given its name

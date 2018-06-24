@@ -33,8 +33,9 @@ test_that("get_row_totals rejects invalid column numbers", {
     expect_error(get_row_totals(data, to = 5), msg)
     expect_error(get_row_totals(data, from = 2, to = 1), msg)
     expect_error(get_row_totals(data, from = 4, to = 3), msg)
-    expect_error(get_row_totals(data, from = "a"), msg)
-    expect_error(get_row_totals(data, to = "b"), msg)
+    expect_error(get_row_totals(data, from = "x"), msg)
+    expect_error(get_row_totals(data, to = "y"), msg)
+    expect_error(get_row_totals(data, from = "d", to = "c"), msg)
 })
 
 test_that("get_row_totals rejects columns that aren't numeric", {
@@ -64,6 +65,13 @@ test_that("get_row_totals returns correct data with fewer data columns", {
     expect_equal(output, correct)
 })
 
+test_that("get_row_totals returns correct data with column names", {
+
+    correct <- c(17, 19, 21, 23, 25)
+    output <- get_row_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
 # Tests: add_row_totals ------------------------------------------------------
 
 test_that("add_row_totals rejects data that is not a dataframe", {
@@ -89,8 +97,8 @@ test_that("add_row_totals rejects invalid column numbers", {
     expect_error(add_row_totals(data, to = 5), msg)
     expect_error(add_row_totals(data, from = 2, to = 1), msg)
     expect_error(add_row_totals(data, from = 4, to = 3), msg)
-    expect_error(add_row_totals(data, from = "a"), msg)
-    expect_error(add_row_totals(data, to = "b"), msg)
+    expect_error(add_row_totals(data, from = "x"), msg)
+    expect_error(add_row_totals(data, to = "y"), msg)
 })
 
 test_that("add_row_totals rejects columns that aren't numeric", {
@@ -150,6 +158,19 @@ test_that("add_row_totals returns correct data with fewer data columns", {
     expect_equal(output, correct)
 })
 
+test_that("add_row_totals returns correct data with column names", {
+
+    correct <- tibble::tibble(
+        a = LETTERS[1:5],
+        b = c(1, 2, 3, 4, 5),
+        c = c(6, 7, 8, 9, 10),
+        d = c(11, 12, 13, 14, 15),
+        total = c(17, 19, 21, 23, 25))
+
+    output <- add_row_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
 # Tests: get_col_totals ------------------------------------------------------
 
 test_that("get_col_totals rejects data that is not a dataframe", {
@@ -175,8 +196,9 @@ test_that("get_col_totals rejects invalid column numbers", {
     expect_error(get_col_totals(data, to = 5), msg)
     expect_error(get_col_totals(data, from = 2, to = 1), msg)
     expect_error(get_col_totals(data, from = 4, to = 3), msg)
-    expect_error(get_col_totals(data, from = "a"), msg)
-    expect_error(get_col_totals(data, to = "b"), msg)
+    expect_error(get_col_totals(data, from = "x"), msg)
+    expect_error(get_col_totals(data, to = "y"), msg)
+    expect_error(get_col_totals(data, from = "d", to = "c"), msg)
 })
 
 test_that("get_col_totals rejects columns that aren't numeric", {
@@ -206,6 +228,13 @@ test_that("get_col_totals returns correct data with fewer data columns", {
     expect_equal(output, correct)
 })
 
+test_that("get_col_totals returns correct data with column names", {
+
+    correct <- c(c = 40, d = 65)
+    output <- get_col_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
 # Tests: add_col_totals ------------------------------------------------------
 
 test_that("add_col_totals rejects data that is not a dataframe", {
@@ -231,8 +260,9 @@ test_that("add_col_totals rejects invalid column numbers", {
     expect_error(add_col_totals(data, to = 5), msg)
     expect_error(add_col_totals(data, from = 2, to = 1), msg)
     expect_error(add_col_totals(data, from = 4, to = 3), msg)
-    expect_error(add_col_totals(data, from = "a"), msg)
-    expect_error(add_col_totals(data, to = "b"), msg)
+    expect_error(add_col_totals(data, from = "x"), msg)
+    expect_error(add_col_totals(data, to = "y"), msg)
+    expect_error(add_col_totals(data, from = "d", to = "c"), msg)
 })
 
 test_that("add_col_totals rejects columns that aren't numeric", {
@@ -285,6 +315,18 @@ test_that("add_col_totals returns correct data with fewer data columns", {
         d = c(11, 12, 13, 14, 15, NA))
 
     output <- add_col_totals(data, to = 3)
+    expect_equal(output, correct)
+})
+
+test_that("add_col_totals returns correct data with column names", {
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], "total"),
+        b = c(1, 2, 3, 4, 5, NA),
+        c = c(6, 7, 8, 9, 10, 40),
+        d = c(11, 12, 13, 14, 15, 65))
+
+    output <- add_col_totals(data, from = "c", to = "d")
     expect_equal(output, correct)
 })
 
