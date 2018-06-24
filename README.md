@@ -20,7 +20,7 @@ devtools::install_github("olihawkins/cltools")
 
 ### Row and column totals
 
-Functions for row and column totals provide a convenient way to create and add row and column totals for data stored in columns in a dataframe. `get_row_totals` sums the data in a set of columns containing numerical data. The target columns are specified with the `from` and `to` arguments. By default the function assumes that all columns other than the first column are to be summed.
+Functions for row and column totals provide a convenient way to create and add row and column totals for data stored in columns in a dataframe. `get_row_totals` sums the values in each row across a set of columns containing numerical data. The target columns are specified with the `from` and `to` arguments. By default the function assumes that all columns other than the first column are to be summed.
 
 ``` r
 data <- tibble::tibble(
@@ -36,6 +36,16 @@ get_row_totals(data, from = 3)
 # [1] 17 19 21 23 25
 
 get_row_totals(data, from = 2, to = 3)
+# [1]  7  9 11 13 15
+```
+
+The `from` and `to` arguments cam be column names or column numbers.
+
+``` r
+get_row_totals(data, from = "c")
+# [1] 17 19 21 23 25
+
+get_row_totals(data, from = "b", to = "c")
 # [1]  7  9 11 13 15
 ```
 
@@ -111,7 +121,7 @@ add_col_totals(data, from = 3, lcols = c(1, 2))
 If the column indices specified with `lcols` are invalid for any reason they are silently ignored. Similarly, setting `lcols` to `NULL` will stop the function attempting to include any labels in the new row.
 
 ``` r
-add_col_totals(data, from = 3, lcols = NULL)
+add_col_totals(data, from = "c", lcols = NULL)
 # # A tibble: 6 x 5
 #   a     b         c     d     e
 #   <chr> <chr> <dbl> <dbl> <dbl>
@@ -126,7 +136,7 @@ add_col_totals(data, from = 3, lcols = NULL)
 As before, the `label` argument can be used to provide an alternative label for the totals.
 
 ``` r
-add_col_totals(data, from = 3, label = "all", lcols = c(1, 2))
+add_col_totals(data, from = "c", label = "all", lcols = c(1, 2))
 # # A tibble: 6 x 5
 #   a     b         c     d     e
 #   <chr> <chr> <dbl> <dbl> <dbl>
@@ -188,7 +198,7 @@ get_col_percent(data, from = 3)
 # 2 B         2 0.333 0.333
 # 3 C         3 0.5   0.5  
 
-get_row_percent(data, to = 3)
+get_row_percent(data, to = "c")
 # # A tibble: 3 x 3
 #   a         b     c
 #   <chr> <dbl> <dbl>
@@ -196,7 +206,7 @@ get_row_percent(data, to = 3)
 # 2 B       0.5   0.5
 # 3 C       0.5   0.5
 
-get_col_percent(data, to = 3)
+get_col_percent(data, to = "c")
 # # A tibble: 3 x 3
 #   a         b     c
 #   <chr> <dbl> <dbl>
@@ -248,7 +258,7 @@ add_col_percent(data)
 As before, these functions take `from` and `to` arguments to specify the target rows.
 
 ``` r
-add_row_percent(data, from = 3)
+add_row_percent(data, from = "c")
 # # A tibble: 3 x 6
 #   a         b     c     d  pc_c  pc_d
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
@@ -256,7 +266,7 @@ add_row_percent(data, from = 3)
 # 2 B         2     2     4 0.333 0.667
 # 3 C         3     3     6 0.333 0.667
 
-add_col_percent(data, to = 3)
+add_col_percent(data, to = "c")
 # # A tibble: 3 x 6
 #   a         b     c     d  pc_b  pc_c
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
