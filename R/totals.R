@@ -1,3 +1,17 @@
+#' Get row totals for a set of columns in a dataframe without validation
+#'
+#' This is the raw version of \code{get_row_totals}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+get_row_totals_dfr <- function(data, from = 2, to = ncol(data)) {
+
+    # Get data as a matrix and calculate row totals
+    m <- data.matrix(data[from:to])
+    rowSums(m)
+}
+
 #' Get row totals for a set of columns in a dataframe
 #'
 #' Calculates row totals for a set of columns in a dataframe and returns them
@@ -17,15 +31,23 @@
 #'
 get_row_totals <- function(data, from = 2, to = ncol(data)) {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    run_dfr_func(get_row_totals_dfr, data, from, to)
+}
 
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
+#' Add row totals for a set of columns in a dataframe without validation
+#'
+#' This is the raw version of \code{add_row_totals}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+add_row_totals_dfr <- function(data,
+                               from = 2,
+                               to = ncol(data),
+                               label = "total") {
 
-    # Get data as a matrix and calculate row totals
-    m <- data.matrix(data[from:to])
-    rowSums(m)
+    data[[label]] <- get_row_totals_dfr(data, from, to)
+    data
 }
 
 #' Add row totals for a set of columns in a dataframe
@@ -45,10 +67,26 @@ get_row_totals <- function(data, from = 2, to = ncol(data)) {
 #' @return A tibble containing row totals and any preceding columns.
 #' @export
 #'
-add_row_totals <- function(data, from = 2, to = ncol(data), label = "total") {
+add_row_totals <- function(data,
+                           from = 2,
+                           to = ncol(data),
+                           label = "total") {
 
-    data[[label]] <- get_row_totals(data, from, to)
-    data
+    run_dfr_func(add_row_totals_dfr, data, from, to, label)
+}
+
+#' Get column totals for a set of columns in a dataframe without validation
+#'
+#' This is the raw version of \code{get_col_totals}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+get_col_totals_dfr <- function(data, from = 2, to = ncol(data)) {
+
+    # Get data as a matrix and calculate row totals
+    m <- data.matrix(data[from:to])
+    colSums(m)
 }
 
 #' Get column totals for a set of columns in a dataframe
@@ -70,15 +108,41 @@ add_row_totals <- function(data, from = 2, to = ncol(data), label = "total") {
 #'
 get_col_totals <- function(data, from = 2, to = ncol(data)) {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    run_dfr_func(get_col_totals_dfr, data, from, to)
+}
 
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
+#' Add column totals for a set of columns in a dataframe without validation
+#'
+#' This is the raw version of \code{add_col_totals}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+add_col_totals_dfr <- function(data,
+                               from = 2,
+                               to = ncol(data),
+                               label = "total",
+                               lcols = 1) {
 
-    # Get data as a matrix and calculate row totals
-    m <- data.matrix(data[from:to])
-    colSums(m)
+    # Get the column totals as a list for a totals row
+    ct_row <- as.list(get_col_totals_dfr(data, from, to))
+
+    # Remove invalid label column indices
+    lcols <- unique(lcols)
+    valid_lcols <- lcols %in% 1:ncol(data) & ! (lcols %in% from:to)
+    lcols <- lcols[valid_lcols]
+
+    # Get the names of the label columns
+    label_colnames <- colnames(data)[lcols]
+
+    # Add a label for each label column to the totals row ...
+    for (lc in label_colnames) {
+        # ... but only if it's a character vector
+        if (is.character(data[[lc]])) ct_row[[lc]] <- label
+    }
+
+    # Add the totals row to the data and return
+    dplyr::bind_rows(data, ct_row)
 }
 
 #' Add column totals for a set of columns in a dataframe
@@ -112,23 +176,5 @@ add_col_totals <- function(data,
                            label = "total",
                            lcols = 1) {
 
-    # Get the column totals as a list for a totals row
-    ct_row <- as.list(get_col_totals(data, from, to))
-
-    # Remove invalid label column indices
-    lcols <- unique(lcols)
-    valid_lcols <- lcols %in% 1:ncol(data) & ! (lcols %in% from:to)
-    lcols <- lcols[valid_lcols]
-
-    # Get the names of the label columns
-    label_colnames <- colnames(data)[lcols]
-
-    # Add a label for each label column to the totals row ...
-    for (lc in label_colnames) {
-        # ... but only if it's a character vector
-        if (is.character(data[[lc]])) ct_row[[lc]] <- label
-    }
-
-    # Add the totals row to the data and return
-    dplyr::bind_rows(data, ct_row)
+    run_dfr_func(add_col_totals_dfr, data, from, to, label, lcols)
 }

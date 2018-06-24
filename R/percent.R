@@ -1,3 +1,28 @@
+#' Calculate row percentages for a set of columns in a dataframe without
+#' validatiion
+#'
+#' This is the raw version of \code{get_row_percent}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+get_row_percent_dfr <- function(data, from = 2, to = ncol(data)) {
+
+    # Get data as a matrix and calculate row totals
+    m <- data.matrix(data[from:to])
+    rt <- rowSums(m)
+
+    # Calculate row percentages (if all values are zero set total to NA)
+    rt <- ifelse(rt == 0, NA, rt)
+    rp <- m / rt
+
+    # Convert to tibble and rebind any preceding columns
+    rp <- tibble::as_tibble(rp)
+    if (from > 1) rp <- dplyr::bind_cols(data[1:from - 1], rp)
+
+    rp
+}
+
 #' Calculate row percentages for a set of columns in a dataframe
 #'
 #' Calculates row percentages for a set of columns in a dataframe and returns
@@ -18,25 +43,35 @@
 #'
 get_row_percent <- function(data, from = 2, to = ncol(data)) {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    run_dfr_func(get_row_percent_dfr, data, from, to)
+}
 
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
+#' Calculate row percentages for a set of columns in a dataframe and add
+#' them to the dataframe without validation
+#'
+#' This is the raw version of \code{add_row_percent}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+add_row_percent_dfr <- function(data,
+                                from = 2,
+                                to = ncol(data),
+                                prefix = "pc_") {
 
-    # Get data as a matrix and calculate row totals
-    m <- data.matrix(data[from:to])
-    rt <- rowSums(m)
+    # Get just the columns for calculating percentages
+    data_cols <- data[from:to]
 
-    # Calculate row percentages (if all values are zero set total to NA)
-    rt <- ifelse(rt == 0, NA, rt)
-    rp <- m / rt
+    # Get the row percentages
+    rp <- get_row_percent_dfr(data_cols, from = 1)
 
-    # Convert to tibble and rebind any preceding columns
-    rp <- tibble::as_tibble(rp)
-    if (from > 1) rp <- dplyr::bind_cols(data[1:from - 1], rp)
+    # Update the column names with the prefix
+    colnames(rp) <- purrr::map_chr(
+        colnames(rp),
+        ~ paste(c(prefix, .x), collapse = ""))
 
-    rp
+    # Bind the percentage columns and return
+    dplyr::bind_cols(data, rp)
 }
 
 #' Calculate row percentages for a set of columns in a dataframe and add
@@ -56,27 +91,37 @@ get_row_percent <- function(data, from = 2, to = ncol(data)) {
 #'   for columns specified by \code{from} and \code{to}.
 #' @export
 #'
-add_row_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
+add_row_percent <- function(data,
+                            from = 2,
+                            to = ncol(data),
+                            prefix = "pc_") {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    run_dfr_func(add_row_percent_dfr, data, from, to, prefix)
+}
 
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
+#' Calculate column percentages for a set of columns in a dataframe without
+#' validatiion
+#'
+#' This is the raw version of \code{get_col_percent}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+get_col_percent_dfr <- function(data, from = 2, to = ncol(data)) {
 
-    # Get just the columns for calculating percentages
-    data_cols <- data[from:to]
+    # Get data as a matrix and calculate column totals
+    m <- data.matrix(data[from:to])
+    ct <- colSums(m)
 
-    # Get the row percentages
-    rp <- get_row_percent(data_cols, from = 1)
+    # Calculate column percentages (if all values are zero set total to NA)
+    ct <- ifelse(ct == 0, NA, ct)
+    cp <- t(t(m) / ct)
 
-    # Update the column names with the prefix
-    colnames(rp) <- purrr::map_chr(
-        colnames(rp),
-        ~ paste(c(prefix, .x), collapse = ""))
+    # Convert to tibble and rebind any preceding columns
+    cp <- tibble::as_tibble(cp)
+    if (from > 1) cp <- dplyr::bind_cols(data[1:from - 1], cp)
 
-    # Bind the percentage columns and return
-    dplyr::bind_cols(data, rp)
+    cp
 }
 
 #' Calculate column percentages for a set of columns in a dataframe
@@ -99,25 +144,35 @@ add_row_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
 #'
 get_col_percent <- function(data, from = 2, to = ncol(data)) {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    run_dfr_func(get_col_percent_dfr, data, from, to)
+}
 
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
+#' Calculate column percentages for a set of columns in a dataframe and add
+#' them to the dataframe without validation
+#'
+#' This is the raw version of \code{add_col_percent}. It should only be used
+#' internally within the package inside functions which provide validation.
+#'
+#' @keywords internal
+#'
+add_col_percent_dfr <- function(data,
+                                from = 2,
+                                to = ncol(data),
+                                prefix = "pc_") {
 
-    # Get data as a matrix and calculate column totals
-    m <- data.matrix(data[from:to])
-    ct <- colSums(m)
+    # Get just the columns for calculating percentages
+    data_cols <- data[from:to]
 
-    # Calculate column percentages (if all values are zero set total to NA)
-    ct <- ifelse(ct == 0, NA, ct)
-    cp <- t(t(m) / ct)
+    # Get the columns percentages
+    cp <- get_col_percent(data_cols, from = 1)
 
-    # Convert to tibble and rebind any preceding columns
-    cp <- tibble::as_tibble(cp)
-    if (from > 1) cp <- dplyr::bind_cols(data[1:from - 1], cp)
+    # Update the column names with the prefix
+    colnames(cp) <- purrr::map_chr(
+        colnames(cp),
+        ~ paste(c(prefix, .x), collapse = ""))
 
-    cp
+    # Bind the percentage columns and return
+    dplyr::bind_cols(data, cp)
 }
 
 #' Calculate column percentages for a set of columns in a dataframe and add
@@ -137,25 +192,10 @@ get_col_percent <- function(data, from = 2, to = ncol(data)) {
 #'   percentages for columns specified by \code{from} and \code{to}.
 #' @export
 #'
-add_col_percent <- function(data, from = 2, to = ncol(data), prefix = "pc_") {
+add_col_percent <- function(data,
+                            from = 2,
+                            to = ncol(data),
+                            prefix = "pc_") {
 
-    # Check data is a dataframe
-    if (! valid_df(data)) stop()
-
-    # Check columns are valid
-    if (! valid_columns(data, from, to)) stop()
-
-    # Get just the columns for calculating percentages
-    data_cols <- data[from:to]
-
-    # Get the columns percentages
-    cp <- get_col_percent(data_cols, from = 1)
-
-    # Update the column names with the prefix
-    colnames(cp) <- purrr::map_chr(
-        colnames(cp),
-        ~ paste(c(prefix, .x), collapse = ""))
-
-    # Bind the percentage columns and return
-    dplyr::bind_cols(data, cp)
+    run_dfr_func(add_col_percent_dfr, data, from, to, prefix)
 }
