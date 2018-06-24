@@ -32,12 +32,12 @@ get_row_percent_dfr <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as row percentages.
-#' @param from The number of the column from which row percentages are
+#' @param from The number or name of the column from which row percentages are
 #'   calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The number of the column to which row percentages are calculated.
-#'   The default is ncol(data), which means row percentages are calculated
-#'   across all remaining columms in the dataframe.
+#' @param to The number or name of the column to which row percentages are
+#'   calculated. The default is ncol(data), which means row percentages are
+#'   calculated across all remaining columms in the dataframe.
 #' @return A tibble containing row percentages and any preceding columns.
 #' @export
 #'
@@ -79,12 +79,12 @@ add_row_percent_dfr <- function(data,
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as row percentages.
-#' @param from The number of the column from which row percentages are
+#' @param from The number or name of the column from which row percentages are
 #'   calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The number of the column to which row percentages are calculated.
-#'   The default is ncol(data), which means row percentages are calculated
-#'   across all remaining columms in the dataframe.
+#' @param to The number or name of the column to which row percentages are
+#'   calculated. The default is ncol(data), which means row percentages are
+#'   calculated across all remaining columms in the dataframe.
 #' @param prefix A string prefix to add to the column names to identify their
 #'   percentage equivalents. The default is "pc_"
 #' @return The input data with additional columns containing row percentages
@@ -133,10 +133,10 @@ get_col_percent_dfr <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as column percentages.
-#' @param from The number of the column from which column percentages are
-#'   calculated. The default is 2, assuming one column for row labels. Use 1
-#'   if there are no preceding data columns.
-#' @param to The number of the column to which column percentages are
+#' @param from The number or name of the column from which column percentages
+#'   are calculated. The default is 2, assuming one column for row labels.
+#'   Use 1 if there are no preceding data columns.
+#' @param to The number or name of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages are
 #'   calculated across all remaining columms in the dataframe.
 #' @return A tibble containing column percentages and any preceding columns.
@@ -180,10 +180,10 @@ add_col_percent_dfr <- function(data,
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as column percentages.
-#' @param from The number of the column from which column percentages are
-#'   calculated. The default is 2, assuming one column for row labels.
+#' @param from The number or name of the column from which column percentages
+#'   are calculated. The default is 2, assuming one column for row labels.
 #'   Use 1 if there are no preceding data columns.
-#' @param to The number of the column to which column percentages are
+#' @param to The number or name of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages
 #'   are calculated across all remaining columms in the dataframe.
 #' @param prefix A string prefix to add to the column names to identify their

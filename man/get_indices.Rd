@@ -2,7 +2,8 @@
 % Please edit documentation in R/indices.R
 \name{get_indices}
 \alias{get_indices}
-\title{Create indices from columns in a dataframe given a baseline row or values}
+\title{Create indices from columns in a dataframe given a baseline row or a vector
+of baseline values}
 \usage{
 get_indices(data, from = 2, to = ncol(data), start = 100, baserow = 1,
   basevals = NULL)
@@ -36,6 +37,6 @@ A tibble containing indices and any preceding columns.
 }
 \description{
 Creates indices from a set of columns in a dataframe using a given row
-number, or a given set of values, as the baseline. Use \code{add_indices}
-to append the indices to the input dataframe.
+number, or vector of values, as the baseline. Use \code{add_indices} to
+append the indices to the input dataframe.
 }

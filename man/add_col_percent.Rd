@@ -11,11 +11,11 @@ add_col_percent(data, from = 2, to = ncol(data), prefix = "pc_")
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as column percentages.}
 
-\item{from}{The number of the column from which column percentages are
-calculated. The default is 2, assuming one column for row labels.
+\item{from}{The number or name of the column from which column percentages
+are calculated. The default is 2, assuming one column for row labels.
 Use 1 if there are no preceding data columns.}
 
-\item{to}{The number of the column to which column percentages are
+\item{to}{The number or name of the column to which column percentages are
 calculated. The default is ncol(data), which means column percentages
 are calculated across all remaining columms in the dataframe.}
 

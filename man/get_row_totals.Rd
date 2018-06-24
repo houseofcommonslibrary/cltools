@@ -10,13 +10,13 @@ get_row_totals(data, from = 2, to = ncol(data))
 \item{data}{A dataframe containing columns of numerical data to be
 summed by row.}
 
-\item{from}{The number of the column from which row totals are calculated.
-The default is 2, assuming one column for row labels. Use 1 if there are
-no preceding data columns.}
+\item{from}{The number or name of the column from which row totals are
+calculated. The default is 2, assuming one column for row labels. Use 1
+if there are no preceding data columns.}
 
-\item{to}{The number of the column to which row totals are calculated. The
-default is ncol(data), which means row totals are calculated across all
-remaining columms in the dataframe.}
+\item{to}{The number or name of the column to which row totals are
+calculated. The default is ncol(data), which means row totals are
+calculated across all remaining columms in the dataframe.}
 }
 \value{
 A numeric vetor of row totals

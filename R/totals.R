@@ -20,12 +20,12 @@ get_row_totals_dfr <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by row.
-#' @param from The number of the column from which row totals are calculated.
-#'   The default is 2, assuming one column for row labels. Use 1 if there are
-#'   no preceding data columns.
-#' @param to The number of the column to which row totals are calculated. The
-#'   default is ncol(data), which means row totals are calculated across all
-#'   remaining columms in the dataframe.
+#' @param from The number or name of the column from which row totals are
+#'   calculated. The default is 2, assuming one column for row labels. Use 1
+#'   if there are no preceding data columns.
+#' @param to The number or name of the column to which row totals are
+#'   calculated. The default is ncol(data), which means row totals are
+#'   calculated across all remaining columms in the dataframe.
 #' @return A numeric vetor of row totals
 #' @export
 #'
@@ -57,12 +57,12 @@ add_row_totals_dfr <- function(data,
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by row.
-#' @param from The number of the column from which row totals are calculated.
-#'   The default is 2, assuming one column for row labels. Use 1 if there are
-#'   no preceding data columns.
-#' @param to The number of the column to which row totals are calculated. The
-#'   default is ncol(data), which means row totals are calculated across all
-#'   remaining columms in the dataframe.
+#' @param from The number or name of the column from which row totals are
+#'   calculated. The default is 2, assuming one column for row labels. Use 1
+#'   if there are no preceding data columns.
+#' @param to The number or name of the column to which row totals are
+#'   calculated. The default is ncol(data), which means row totals are
+#'   calculated across all remaining columms in the dataframe.
 #' @param label The label for the totals column. The default is "total".
 #' @return A tibble containing row totals and any preceding columns.
 #' @export
@@ -97,12 +97,12 @@ get_col_totals_dfr <- function(data, from = 2, to = ncol(data)) {
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by column.
-#' @param from The number of the column from which column totals are
+#' @param from The number or name of the column from which column totals are
 #'   calculated. The default is 2, assuming one column for row labels. Use 1
 #'   if there are no preceding data columns.
-#' @param to The number of the column to which column totals are calculated.
-#'   The default is ncol(data), which means column totals are calculated
-#'   across all remaining columms in the dataframe.
+#' @param to The number or name of the column to which column totals are
+#'   calculated. The default is ncol(data), which means column totals are
+#'   calculated across all remaining columms in the dataframe.
 #' @return A numeric vetor of column totals
 #' @export
 #'
@@ -155,12 +155,12 @@ add_col_totals_dfr <- function(data,
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   summed by column.
-#' @param from The number of the column from which column totals are
+#' @param from The number or name of the column from which column totals are
 #'   calculated. The default is 2, assuming one column for row labels. Use 1
 #'   if there are no preceding data columns.
-#' @param to The number of the column to which column totals are calculated.
-#'   The default is ncol(data), which means column totals are calculated for
-#'   all remaining columms in the dataframe.
+#' @param to The number or name of the column to which column totals are
+#'   calculated. The default is ncol(data), which means column totals are
+#'   calculated for all remaining columms in the dataframe.
 #' @param label The label for the totals row. The default is "total".
 #' @param lcols A vector or scalar containing the indices of the columns to
 #'   to which to add the total label. These columns must be character vectors.

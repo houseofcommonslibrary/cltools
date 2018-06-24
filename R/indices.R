@@ -1,8 +1,9 @@
-#' Create indices from columns in a dataframe given a baseline row or values
+#' Create indices from columns in a dataframe given a baseline row or a vector
+#' of baseline values
 #'
 #' Creates indices from a set of columns in a dataframe using a given row
-#' number, or a given set of values, as the baseline. Use \code{add_indices}
-#' to append the indices to the input dataframe.
+#' number, or vector of values, as the baseline. Use \code{add_indices} to
+#' append the indices to the input dataframe.
 #'
 #' @param data A dataframe containing columns of numerical data to be
 #'   expressed as indices.

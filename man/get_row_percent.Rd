@@ -10,13 +10,13 @@ get_row_percent(data, from = 2, to = ncol(data))
 \item{data}{A dataframe containing columns of numerical data to be
 expressed as row percentages.}
 
-\item{from}{The number of the column from which row percentages are
+\item{from}{The number or name of the column from which row percentages are
 calculated. The default is 2, assuming one column for row labels.
 Use 1 if there are no preceding data columns.}
 
-\item{to}{The number of the column to which row percentages are calculated.
-The default is ncol(data), which means row percentages are calculated
-across all remaining columms in the dataframe.}
+\item{to}{The number or name of the column to which row percentages are
+calculated. The default is ncol(data), which means row percentages are
+calculated across all remaining columms in the dataframe.}
 }
 \value{
 A tibble containing row percentages and any preceding columns.
