@@ -31,11 +31,11 @@ get_indices_dfr <- function(data,
 
         # Check the baseline values themselves if set explicitly
         if (length(basevals) != (to - from + 1)) stop(
-            "The number basevals and target columns are not equal."
+            "The number of basevals and target columns are not equal."
         )
 
         if (0 %in% basevals) stop(
-            "The basevals contains zeros.")
+            "The basevals contain zeros.")
     }
 }
 
