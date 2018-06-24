@@ -179,7 +179,7 @@ get_col_percent(data)
 
 ```
 
-By default percentages are calculated for all columns other than the first, but the target columns can be specified with the `from` and `to` arguments. Columns preceding `from` are included in the results, while columns following `to` are omitted. 
+By default percentages are calculated for all columns other than the first, but the target columns can be specified with the `from` and `to` arguments, which can be either column numbers or column names. Columns preceding `from` are included in the results, while columns following `to` are omitted. 
 
 ``` r
 get_row_percent(data, from = 3)
