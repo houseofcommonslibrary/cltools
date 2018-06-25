@@ -2,7 +2,7 @@
 % Please edit documentation in R/validate.R
 \name{valid_columns}
 \alias{valid_columns}
-\title{Validate column arguments for row percentages, totals and indices}
+\title{Validate columns for row percentages, totals and indices}
 \usage{
 valid_columns(data, from, to)
 }
@@ -17,6 +17,6 @@ valid_columns(data, from, to)
 TRUE if no errors are thrown.
 }
 \description{
-Validate column arguments for row percentages, totals and indices
+Validate columns for row percentages, totals and indices
 }
 \keyword{internal}

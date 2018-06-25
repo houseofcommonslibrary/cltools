@@ -23,7 +23,6 @@ test_that("get_row_percent rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(get_row_percent(NULL), msg)
-    expect_error(get_row_percent(c()), msg)
     expect_error(get_row_percent(c(NA, NA, NA)), msg)
     expect_error(get_row_percent(c("a", "b", "c")), msg)
     expect_error(get_row_percent(c(1, 2, 3)), msg)
@@ -31,9 +30,9 @@ test_that("get_row_percent rejects data that is not a dataframe", {
     expect_error(get_row_percent(list(a = c(1,2,3))), msg)
 })
 
-test_that("get_row_percent rejects invalid column numbers", {
+test_that("get_row_percent rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(get_row_percent(data_row, from = -1), msg)
     expect_error(get_row_percent(data_row, from = 0), msg)
     expect_error(get_row_percent(data_row, from = 6), msg)
@@ -45,6 +44,12 @@ test_that("get_row_percent rejects invalid column numbers", {
     expect_error(get_row_percent(data_row, from = "x"), msg)
     expect_error(get_row_percent(data_row, to = "y"), msg)
     expect_error(get_row_percent(data_row, from = "d", to = "c"), msg)
+
+    expect_error(get_row_percent(data_row, from = c(2, 3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(get_row_percent(data_row, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("get_row_percent rejects columns that aren't numeric", {
@@ -109,7 +114,6 @@ test_that("add_row_percent rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(add_row_percent(NULL), msg)
-    expect_error(add_row_percent(c()), msg)
     expect_error(add_row_percent(c(NA, NA, NA)), msg)
     expect_error(add_row_percent(c("a", "b", "c")), msg)
     expect_error(add_row_percent(c(1, 2, 3)), msg)
@@ -117,9 +121,9 @@ test_that("add_row_percent rejects data that is not a dataframe", {
     expect_error(add_row_percent(list(a = c(1,2,3))), msg)
 })
 
-test_that("add_row_percent rejects invalid column numbers", {
+test_that("add_row_percent rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(add_row_percent(data_row, from = -1), msg)
     expect_error(add_row_percent(data_row, from = 0), msg)
     expect_error(add_row_percent(data_row, from = 6), msg)
@@ -131,6 +135,12 @@ test_that("add_row_percent rejects invalid column numbers", {
     expect_error(add_row_percent(data_row, from = "x"), msg)
     expect_error(add_row_percent(data_row, to = "y"), msg)
     expect_error(add_row_percent(data_row, from = "d", to = "c"), msg)
+
+    expect_error(add_row_percent(data_row, from = c(2, 3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(add_row_percent(data_row, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("add_row_percent rejects columns that aren't numeric", {
@@ -243,7 +253,6 @@ test_that("get_col_percent rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(get_col_percent(NULL), msg)
-    expect_error(get_col_percent(c()), msg)
     expect_error(get_col_percent(c(NA, NA, NA)), msg)
     expect_error(get_col_percent(c("a", "b", "c")), msg)
     expect_error(get_col_percent(c(1, 2, 3)), msg)
@@ -251,9 +260,9 @@ test_that("get_col_percent rejects data that is not a dataframe", {
     expect_error(get_col_percent(list(a = c(1,2,3))), msg)
 })
 
-test_that("get_col_percent rejects invalid column numbers", {
+test_that("get_col_percent rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(get_col_percent(data_col, from = -1), msg)
     expect_error(get_col_percent(data_col, from = 0), msg)
     expect_error(get_col_percent(data_col, from = 7), msg)
@@ -265,6 +274,12 @@ test_that("get_col_percent rejects invalid column numbers", {
     expect_error(get_col_percent(data_col, from = "x"), msg)
     expect_error(get_col_percent(data_col, to = "y"), msg)
     expect_error(get_col_percent(data_col, from = "d", to = "c"), msg)
+
+    expect_error(get_col_percent(data_col, from = c(2, 3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(get_col_percent(data_col, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("get_col_percent rejects columns that aren't numeric", {
@@ -332,7 +347,6 @@ test_that("add_col_percent rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(add_col_percent(NULL), msg)
-    expect_error(add_col_percent(c()), msg)
     expect_error(add_col_percent(c(NA, NA, NA)), msg)
     expect_error(add_col_percent(c("a", "b", "c")), msg)
     expect_error(add_col_percent(c(1, 2, 3)), msg)
@@ -340,9 +354,9 @@ test_that("add_col_percent rejects data that is not a dataframe", {
     expect_error(add_col_percent(list(a = c(1,2,3))), msg)
 })
 
-test_that("add_col_percent rejects invalid column numbers", {
+test_that("add_col_percent rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(add_col_percent(data_col, from = -1), msg)
     expect_error(add_col_percent(data_col, from = 0), msg)
     expect_error(add_col_percent(data_col, from = 7), msg)
@@ -354,6 +368,12 @@ test_that("add_col_percent rejects invalid column numbers", {
     expect_error(add_col_percent(data_col, from = "x"), msg)
     expect_error(add_col_percent(data_col, to = "y"), msg)
     expect_error(add_col_percent(data_col, from = "d", to = "c"), msg)
+
+    expect_error(add_col_percent(data_col, from = c(2, 3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(add_col_percent(data_col, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("add_col_percent rejects columns that aren't numeric", {

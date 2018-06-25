@@ -5,7 +5,7 @@
 \title{Create indices from columns in a dataframe given a baseline row or a vector
 of baseline values without validation}
 \usage{
-get_indices_dfr(data, from = 2, to = ncol(data), start = 100,
+get_indices_dfr(data, from = 2, to = ncol(data), base = 100,
   baserow = 1, basevals = NULL)
 }
 \description{

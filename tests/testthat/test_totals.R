@@ -14,7 +14,6 @@ test_that("get_row_totals rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(get_row_totals(NULL), msg)
-    expect_error(get_row_totals(c()), msg)
     expect_error(get_row_totals(c(NA, NA, NA)), msg)
     expect_error(get_row_totals(c("a", "b", "c")), msg)
     expect_error(get_row_totals(c(1, 2, 3)), msg)
@@ -22,9 +21,9 @@ test_that("get_row_totals rejects data that is not a dataframe", {
     expect_error(get_row_totals(list(a = c(1,2,3))), msg)
 })
 
-test_that("get_row_totals rejects invalid column numbers", {
+test_that("get_row_totals rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(get_row_totals(data, from = -1), msg)
     expect_error(get_row_totals(data, from = 0), msg)
     expect_error(get_row_totals(data, from = 5), msg)
@@ -36,6 +35,12 @@ test_that("get_row_totals rejects invalid column numbers", {
     expect_error(get_row_totals(data, from = "x"), msg)
     expect_error(get_row_totals(data, to = "y"), msg)
     expect_error(get_row_totals(data, from = "d", to = "c"), msg)
+
+    expect_error(get_row_totals(data, from = c(2,3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(get_row_totals(data, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("get_row_totals rejects columns that aren't numeric", {
@@ -78,7 +83,6 @@ test_that("add_row_totals rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(add_row_totals(NULL), msg)
-    expect_error(add_row_totals(c()), msg)
     expect_error(add_row_totals(c(NA, NA, NA)), msg)
     expect_error(add_row_totals(c("a", "b", "c")), msg)
     expect_error(add_row_totals(c(1, 2, 3)), msg)
@@ -86,9 +90,9 @@ test_that("add_row_totals rejects data that is not a dataframe", {
     expect_error(add_row_totals(list(a = c(1,2,3))), msg)
 })
 
-test_that("add_row_totals rejects invalid column numbers", {
+test_that("add_row_totals rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(add_row_totals(data, from = -1), msg)
     expect_error(add_row_totals(data, from = 0), msg)
     expect_error(add_row_totals(data, from = 5), msg)
@@ -99,6 +103,12 @@ test_that("add_row_totals rejects invalid column numbers", {
     expect_error(add_row_totals(data, from = 4, to = 3), msg)
     expect_error(add_row_totals(data, from = "x"), msg)
     expect_error(add_row_totals(data, to = "y"), msg)
+
+    expect_error(add_row_totals(data, from = c(2,3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(add_row_totals(data, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("add_row_totals rejects columns that aren't numeric", {
@@ -177,7 +187,6 @@ test_that("get_col_totals rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(get_col_totals(NULL), msg)
-    expect_error(get_col_totals(c()), msg)
     expect_error(get_col_totals(c(NA, NA, NA)), msg)
     expect_error(get_col_totals(c("a", "b", "c")), msg)
     expect_error(get_col_totals(c(1, 2, 3)), msg)
@@ -185,9 +194,9 @@ test_that("get_col_totals rejects data that is not a dataframe", {
     expect_error(get_col_totals(list(a = c(1,2,3))), msg)
 })
 
-test_that("get_col_totals rejects invalid column numbers", {
+test_that("get_col_totals rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(get_col_totals(data, from = -1), msg)
     expect_error(get_col_totals(data, from = 0), msg)
     expect_error(get_col_totals(data, from = 5), msg)
@@ -199,6 +208,12 @@ test_that("get_col_totals rejects invalid column numbers", {
     expect_error(get_col_totals(data, from = "x"), msg)
     expect_error(get_col_totals(data, to = "y"), msg)
     expect_error(get_col_totals(data, from = "d", to = "c"), msg)
+
+    expect_error(get_col_totals(data, from = c(2,3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(get_col_totals(data, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("get_col_totals rejects columns that aren't numeric", {
@@ -241,7 +256,6 @@ test_that("add_col_totals rejects data that is not a dataframe", {
 
     msg <- "The data is not a dataframe."
     expect_error(add_col_totals(NULL), msg)
-    expect_error(add_col_totals(c()), msg)
     expect_error(add_col_totals(c(NA, NA, NA)), msg)
     expect_error(add_col_totals(c("a", "b", "c")), msg)
     expect_error(add_col_totals(c(1, 2, 3)), msg)
@@ -249,9 +263,9 @@ test_that("add_col_totals rejects data that is not a dataframe", {
     expect_error(add_col_totals(list(a = c(1,2,3))), msg)
 })
 
-test_that("add_col_totals rejects invalid column numbers", {
+test_that("add_col_totals rejects invalid from and to arguments", {
 
-    msg <- "The given column numbers are not valid."
+    msg <- "The given columns are out of range."
     expect_error(add_col_totals(data, from = -1), msg)
     expect_error(add_col_totals(data, from = 0), msg)
     expect_error(add_col_totals(data, from = 5), msg)
@@ -263,6 +277,12 @@ test_that("add_col_totals rejects invalid column numbers", {
     expect_error(add_col_totals(data, from = "x"), msg)
     expect_error(add_col_totals(data, to = "y"), msg)
     expect_error(add_col_totals(data, from = "d", to = "c"), msg)
+
+    expect_error(add_col_totals(data, from = c(2,3)),
+                 "The from argument must be a vector of length 1")
+
+    expect_error(add_col_totals(data, to = c(3, 4)),
+                 "The to argument must be a vector of length 1")
 })
 
 test_that("add_col_totals rejects columns that aren't numeric", {
@@ -351,5 +371,17 @@ test_that("add_col_totals takes a user defined label", {
         d = c(11, 12, 13, 14, 15, 65))
 
     output <- add_col_totals(data, label = "Grand Total")
+    expect_equal(output, correct)
+})
+
+test_that("add_col_totals removes labels when lcols is NULL", {
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], NA),
+        b = c(1, 2, 3, 4, 5, 15),
+        c = c(6, 7, 8, 9, 10, 40),
+        d = c(11, 12, 13, 14, 15, 65))
+
+    output <- add_col_totals(data, lcols = NULL)
     expect_equal(output, correct)
 })

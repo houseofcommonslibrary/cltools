@@ -18,7 +18,7 @@
 run_dfr_func <- function(f, data, from, to, ...) {
 
     # Check data is a dataframe
-    if (! valid_df(data)) stop()
+    if (! valid_args(data, from, to)) stop()
 
     # Convert column names to numbers if necessary
     if (is.character(from)) from <- get_col_num(data, from)
@@ -31,22 +31,33 @@ run_dfr_func <- function(f, data, from, to, ...) {
     f(data, from, to, ...)
 }
 
-#' Validate input data is a dataframe
+#' Validate the arguments to a dataframe range function are the right type
+#' and size.
 #'
 #' @param data The input data.
+#' @param from The number or name of the column from which data is processed.
+#' @param to The number or name of the column to which data is processed.
 #' @return TRUE if no errors are thrown.
 #' @keywords internal
 #'
-valid_df <- function(data) {
+valid_args <- function(data, from, to) {
 
     # Check data is a dataframe
     if (! is.data.frame(data)) stop(
         "The data is not a dataframe.")
 
+    # Check from is a vetor of length 1.
+    if (! is.vector(from) || length(from) != 1) stop(
+        "The from argument must be a vector of length 1.")
+
+    # Check to is a vetor of length 1.
+    if (! is.vector(to) || length(to) != 1) stop(
+        "The to argument must be a vector of length 1.")
+
     TRUE
 }
 
-#' Validate column arguments for row percentages, totals and indices
+#' Validate columns for row percentages, totals and indices
 #'
 #' @param data A dataframe containing columns of numerical data for analysis.
 #' @param from The number of the column from which data is processed.
@@ -58,7 +69,7 @@ valid_columns <- function(data, from, to) {
 
     # Check column indices are sane
     if (from < 1 || to > ncol(data) || from > to) stop(
-        "The given column numbers are not valid.")
+        "The given columns are out of range.")
 
     # Check columns are numeric
     if (! all(purrr::map_lgl(data[from:to], is.numeric))) stop (

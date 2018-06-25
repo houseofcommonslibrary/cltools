@@ -164,7 +164,7 @@ add_col_percent_dfr <- function(data,
     data_cols <- data[from:to]
 
     # Get the columns percentages
-    cp <- get_col_percent(data_cols, from = 1)
+    cp <- get_col_percent_dfr(data_cols, from = 1)
 
     # Update the column names with the prefix
     colnames(cp) <- purrr::map_chr(
