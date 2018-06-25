@@ -2,7 +2,7 @@ context("Indices")
 
 # Setup ----------------------------------------------------------------------
 
-v <- c(200, 250, 300, 350, 400, 450, 500)
+data_vec <- c(200, 250, 300, 350, 400, 450, 500)
 
 data <- tibble::tibble(
     a = LETTERS[1:5],
@@ -14,7 +14,7 @@ data <- tibble::tibble(
 
 test_that("get_index rejects non-numeric vectors", {
 
-    msg <- "The vector is not numeric."
+    msg <- "The data is not a numeric vector."
     expect_error(get_index(NULL), msg)
     expect_error(get_index(c(NA, NA, NA)), msg)
     expect_error(get_index(c("a", "b", "c")), msg)
@@ -25,113 +25,112 @@ test_that("get_index rejects non-numeric vectors", {
 test_that("get_index rejects invalid base", {
 
     msg <- "The base must be a vector of length 1."
-    expect_error(get_index(v, base = NULL), msg)
-    expect_error(get_index(v, base = c(1, 2)), msg)
+    expect_error(get_index(data_vec, base = NULL), msg)
+    expect_error(get_index(data_vec, base = c(1, 2)), msg)
 
     msg <- "The base for the index must be a positive number above one."
-    expect_error(get_index(v, base = NA), msg)
-    expect_error(get_index(v, base = "a"), msg)
-    expect_error(get_index(v, base = FALSE), msg)
-    expect_error(get_index(v, base = 0), msg)
-    expect_error(get_index(v, base = -1), msg)
+    expect_error(get_index(data_vec, base = NA), msg)
+    expect_error(get_index(data_vec, base = "a"), msg)
+    expect_error(get_index(data_vec, base = FALSE), msg)
+    expect_error(get_index(data_vec, base = 0), msg)
+    expect_error(get_index(data_vec, base = -1), msg)
 })
 
 test_that("get_index rejects invalid basepos", {
 
     msg <- "The basepos is not numeric."
-    expect_error(get_index(v, basepos = NULL), msg)
-    expect_error(get_index(v, basepos = NA), msg)
-    expect_error(get_index(v, basepos = "a"), msg)
-    expect_error(get_index(v, basepos = FALSE), msg)
+    expect_error(get_index(data_vec, basepos = NULL), msg)
+    expect_error(get_index(data_vec, basepos = NA), msg)
+    expect_error(get_index(data_vec, basepos = "a"), msg)
+    expect_error(get_index(data_vec, basepos = FALSE), msg)
 
     msg <- "The basepos must be a vector of length 1."
-    expect_error(get_index(v, basepos = c(1, 2)), msg)
+    expect_error(get_index(data_vec, basepos = c(1, 2)), msg)
 
     msg <- "The basepos is out of range."
-    expect_error(get_index(v, basepos = -1), msg)
-    expect_error(get_index(v, basepos = 0), msg)
-    expect_error(get_index(v, basepos = 8), msg)
-
+    expect_error(get_index(data_vec, basepos = -1), msg)
+    expect_error(get_index(data_vec, basepos = 0), msg)
+    expect_error(get_index(data_vec, basepos = 8), msg)
 })
 
 test_that("get_index rejects a NA value at the basepos.", {
 
     msg <- "The value at the basepos should not be NA."
-    expect_error(get_index(c(NA, v), basepos = 1), msg)
+    expect_error(get_index(c(NA, data_vec), basepos = 1), msg)
 })
 
 test_that("get_index rejects a zero value at the basepos.", {
 
     msg <- "The value at the basepos should not be zero."
-    expect_error(get_index(c(0, v), basepos = 1), msg)
+    expect_error(get_index(c(0, data_vec), basepos = 1), msg)
 })
 
 test_that("get_index rejects invalid baseval.", {
 
     msg <- "The baseval is not numeric."
-    expect_error(get_index(v, baseval = NA), msg)
-    expect_error(get_index(v, baseval = "a"), msg)
-    expect_error(get_index(v, baseval = FALSE), msg)
+    expect_error(get_index(data_vec, baseval = NA), msg)
+    expect_error(get_index(data_vec, baseval = "a"), msg)
+    expect_error(get_index(data_vec, baseval = FALSE), msg)
 
     msg <- "The baseval must be a vector of length 1."
-    expect_error(get_index(v, baseval = c(1, 2)), msg)
+    expect_error(get_index(data_vec, baseval = c(1, 2)), msg)
 
     msg <- "The baseval should not be NA."
-    expect_error(get_index(v, baseval = c(NA, 1)[1]), msg)
+    expect_error(get_index(data_vec, baseval = c(NA, 1)[1]), msg)
 
     msg <- "The baseval should not be zero."
-    expect_error(get_index(v, baseval = 0), msg)
+    expect_error(get_index(data_vec, baseval = 0), msg)
 })
 
 test_that("get_index returns correct data with defaults", {
 
     correct <- c(100, 125, 150, 175, 200, 225, 250)
-    output <- get_index(v)
+    output <- get_index(data_vec)
     expect_equal(output, correct)
 })
 
 test_that("get_index returns correct data with a different base", {
 
     correct <- c(50.0,  62.5,  75.0,  87.5, 100.0, 112.5, 125.0)
-    output <- get_index(v, base = 50)
+    output <- get_index(data_vec, base = 50)
     expect_equal(output, correct)
 
     correct <- c(1000,  1250,  1500, 1750, 2000, 2250, 2500)
-    output <- get_index(v, base = 1000)
+    output <- get_index(data_vec, base = 1000)
     expect_equal(output, correct)
 
     correct <- c(4, 5, 6, 7, 8, 9, 10)
-    output <- get_index(v, base = 4)
+    output <- get_index(data_vec, base = 4)
     expect_equal(output, correct)
 })
 
 test_that("get_index returns correct data with a different basepos", {
 
     correct <- c(80, 100, 120, 140, 160, 180, 200)
-    output <- get_index(v, basepos = 2)
+    output <- get_index(data_vec, basepos = 2)
     expect_equal(output, correct)
 
     correct <- c(50.0, 62.5, 75.0, 87.5, 100.0, 112.5, 125.0)
-    output <- get_index(v, basepos = 5)
+    output <- get_index(data_vec, basepos = 5)
     expect_equal(output, correct)
 
     correct <- c(16, 20, 24, 28, 32, 36, 40)
-    output <- get_index(v, basepos = 2, base = 20)
+    output <- get_index(data_vec, basepos = 2, base = 20)
     expect_equal(output, correct)
 })
 
 test_that("get_index returns correct data with a given baseval", {
 
     correct <- c(20, 25, 30, 35, 40, 45, 50)
-    output <- get_index(v, baseval = 1000)
+    output <- get_index(data_vec, baseval = 1000)
     expect_equal(output, correct)
 
     correct <- c(400, 500, 600, 700, 800, 900, 1000)
-    output <- get_index(v, baseval = 50)
+    output <- get_index(data_vec, baseval = 50)
     expect_equal(output, correct)
 
     correct <- c(0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50)
-    output <- get_index(v, base = 1, baseval = 1000)
+    output <- get_index(data_vec, base = 1, baseval = 1000)
     expect_equal(output, correct)
 })
 

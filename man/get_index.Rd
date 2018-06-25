@@ -5,10 +5,10 @@
 \title{Create a statistical index from a numeric vector given a baseline vector
 index or a baseline value}
 \usage{
-get_index(v, base = 100, basepos = 1, baseval = NULL)
+get_index(data, base = 100, basepos = 1, baseval = NULL)
 }
 \arguments{
-\item{v}{A numeric vector containing values to be expressed as an index.}
+\item{data}{A numeric vector containing values to be expressed as an index.}
 
 \item{base}{The baseline value of the created index. The default is 100.
 The base must be a positive number greater than zero.}
@@ -21,7 +21,7 @@ zero. This argument is ignored if the base value is set explcitly with
 \item{baseval}{Specifies explicitly the value to use as the baseline when
 calculating the index. Use this if the baseline value to be used is not
 represented in the vector. The default is NULL, which means the function
-will use the values in the \code{baserow} instead. The baseline value
+will use the value in the \code{basepos} instead. The baseline value
 must not be zero.}
 }
 \value{

@@ -4,7 +4,7 @@
 #' Creates a statistical index from a numeric vector given a baseline
 #' vector index or a baseline value.
 #'
-#' @param v A numeric vector containing values to be expressed as an index.
+#' @param data A numeric vector containing values to be expressed as an index.
 #' @param base The baseline value of the created index. The default is 100.
 #'   The base must be a positive number greater than zero.
 #' @param basepos The vector index of the value to be used as the baseline for
@@ -14,15 +14,15 @@
 #' @param baseval Specifies explicitly the value to use as the baseline when
 #'   calculating the index. Use this if the baseline value to be used is not
 #'   represented in the vector. The default is NULL, which means the function
-#'   will use the values in the \code{baserow} instead. The baseline value
+#'   will use the value in the \code{basepos} instead. The baseline value
 #'   must not be zero.
 #' @return A vector containing the created index.
 #' @export
 #'
-get_index <- function(v, base = 100, basepos = 1, baseval = NULL) {
+get_index <- function(data, base = 100, basepos = 1, baseval = NULL) {
 
     # Check the vector is numeric
-    if (! is.numeric(v)) stop ("The vector is not numeric.")
+    if (! is.numeric(data)) stop ("The data is not a numeric vector.")
 
     # Check the base has length 1
     if(length(base) != 1) stop (
@@ -44,16 +44,16 @@ get_index <- function(v, base = 100, basepos = 1, baseval = NULL) {
             "The basepos must be a vector of length 1.")
 
         # Check the index and value of the basepos if baseval is NULL
-        if (basepos < 1 || basepos > length(v)) stop(
+        if (basepos < 1 || basepos > length(data)) stop(
             "The basepos is out of range.")
 
-        if (is.na(v[basepos])) stop(
+        if (is.na(data[basepos])) stop(
             "The value at the basepos should not be NA.")
 
-        if (v[basepos] == 0) stop(
+        if (data[basepos] == 0) stop(
             "The value at the basepos should not be zero.")
 
-        baseval <- v[basepos]
+        baseval <- data[basepos]
 
     } else {
 
@@ -72,7 +72,7 @@ get_index <- function(v, base = 100, basepos = 1, baseval = NULL) {
             "The baseval should not be zero.")
     }
 
-    v / baseval * base
+    data / baseval * base
 }
 
 #' Create indices from columns in a dataframe given a baseline row or a vector
