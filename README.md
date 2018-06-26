@@ -20,7 +20,7 @@ devtools::install_github("olihawkins/cltools")
 * [Core principles](https://github.com/olihawkins/cltools#core-principles)
 * [Row and column totals](https://github.com/olihawkins/cltools#row-and-column-totals)
 * [Row and column percentages](https://github.com/olihawkins/cltools#row-and-column-percentages)
-* [Missing data](https://github.com/olihawkins/cltools#missing-data)
+* [Missing values](https://github.com/olihawkins/cltools#missing-data)
 * [Statistical indices](https://github.com/olihawkins/cltools#statistical-indices)
 * [Deflators and real terms series](https://github.com/olihawkins/cltools#deflators-and-real-terms-series)
 
