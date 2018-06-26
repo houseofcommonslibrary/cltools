@@ -15,8 +15,8 @@ NAs or zeros.}
 
 \item{basepos}{The vector index of the baseline for the deflated series:
 this equivalent to the period in which all prices will be expressed. The
-default value is the index of the last value in the series i.e. the most
-recent period.}
+default value is the index of the last value in the series, which is
+assumed to be the most recent period.}
 }
 \value{
 The deflated data series as a numeric vector.

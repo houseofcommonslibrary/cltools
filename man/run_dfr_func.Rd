@@ -14,7 +14,7 @@ run_dfr_func(f, data, from, to, ...)
 \item{to}{The end column: either and index or name.}
 }
 \value{
-The retrun value of the function.
+The return value of the function.
 }
 \description{
 A dataframe range function is a generic name for a set of functions in this
@@ -25,6 +25,6 @@ columns over which operations will be performed.
 \details{
 This function provides standard validation for the arguments that are
 common to these functions. It takes a dataframe range function, checks the
-standard inputs are valid, runs the function and returns any values.
+standard inputs are valid, runs the function, and returns any values.
 }
 \keyword{internal}

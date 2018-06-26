@@ -195,7 +195,8 @@ test_that("get_indices returns correct data with defaults", {
         a = LETTERS[1:5],
         b = c(100, 125, 150, 200, NA),
         c = c(100, 75, 50, 25, NA),
-        d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data))
     expect_equal(output, correct)
@@ -207,7 +208,8 @@ test_that("get_indices returns correct data with more label columns", {
         a = LETTERS[1:5],
         b = c(200, 250, 300, 400, NA),
         c = c(100, 75, 50, 25, NA),
-        d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, from = 3))
     expect_equal(output, correct)
@@ -218,7 +220,8 @@ test_that("get_indices returns correct data with fewer data columns", {
     correct <- data.frame(
         a = LETTERS[1:5],
         b = c(100, 125, 150, 200, NA),
-        c = c(100, 75, 50, 25, NA), stringsAsFactors = FALSE)
+        c = c(100, 75, 50, 25, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, to = 3))
     expect_equal(output, correct)
@@ -230,7 +233,8 @@ test_that("get_indices returns correct data with column names", {
         a = LETTERS[1:5],
         b = c(200, 250, 300, 400, NA),
         c = c(100, 75, 50, 25, NA),
-        d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, from = "c", to = "d"))
     expect_equal(output, correct)
@@ -242,7 +246,8 @@ test_that("get_indices returns correct data with a different base", {
         a = LETTERS[1:5],
         b = c(4, 5, 6, 8, NA),
         c = c(4, 3, 2, 1, NA),
-        d = c(4, 8, 12, 0, NA), stringsAsFactors = FALSE)
+        d = c(4, 8, 12, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, base = 4))
     expect_equal(output, correct)
@@ -254,7 +259,8 @@ test_that("get_indices returns correct data with a different baserow", {
         a = LETTERS[1:5],
         b = c(80, 100, 120, 160, NA),
         c = c(400/3, 300/3, 200/3, 100/3, NA),
-        d = c(50, 100, 150, 0, NA), stringsAsFactors = FALSE)
+        d = c(50, 100, 150, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, baserow = 2))
     expect_equal(output, correct)
@@ -266,7 +272,8 @@ test_that("get_indices returns correct data with a given baseval", {
         a = LETTERS[1:5],
         b = c(200, 250, 300, 400, NA),
         c = c(200, 150, 100, 50, NA),
-        d = c(200, 400, 600, 0, NA), stringsAsFactors = FALSE)
+        d = c(200, 400, 600, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_indices(data, basevals = c(100, 200, 25)))
     expect_equal(output, correct)
@@ -336,7 +343,8 @@ test_that("add_indices returns correct data with defaults", {
         d = c(50, 100, 150, 0, NA),
         ix_b = c(100, 125, 150, 200, NA),
         ix_c = c(100, 75, 50, 25, NA),
-        ix_d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data))
     expect_equal(output, correct)
@@ -350,7 +358,8 @@ test_that("add_indices returns correct data with more label columns", {
         c = c(400, 300, 200, 100, NA),
         d = c(50, 100, 150, 0, NA),
         ix_c = c(100, 75, 50, 25, NA),
-        ix_d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, from = 3))
     expect_equal(output, correct)
@@ -364,7 +373,8 @@ test_that("add_indices returns correct data with fewer data columns", {
         c = c(400, 300, 200, 100, NA),
         d = c(50, 100, 150, 0, NA),
         ix_b = c(100, 125, 150, 200, NA),
-        ix_c = c(100, 75, 50, 25, NA), stringsAsFactors = FALSE)
+        ix_c = c(100, 75, 50, 25, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, to = 3))
     expect_equal(output, correct)
@@ -378,7 +388,8 @@ test_that("add_indices returns correct data with column names", {
         c = c(400, 300, 200, 100, NA),
         d = c(50, 100, 150, 0, NA),
         ix_c = c(100, 75, 50, 25, NA),
-        ix_d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, from = "c", to = "d"))
     expect_equal(output, correct)
@@ -393,7 +404,8 @@ test_that("add_indices returns correct data with a different base", {
         d = c(50, 100, 150, 0, NA),
         ix_b = c(4, 5, 6, 8, NA),
         ix_c = c(4, 3, 2, 1, NA),
-        ix_d = c(4, 8, 12, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(4, 8, 12, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, base = 4))
     expect_equal(output, correct)
@@ -408,7 +420,8 @@ test_that("add_indices returns correct data with a different baserow", {
         d = c(50, 100, 150, 0, NA),
         ix_b = c(80, 100, 120, 160, NA),
         ix_c = c(400/3, 300/3, 200/3, 100/3, NA),
-        ix_d = c(50, 100, 150, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(50, 100, 150, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, baserow = 2))
     expect_equal(output, correct)
@@ -423,7 +436,8 @@ test_that("add_indices returns correct data with a given baseval", {
         d = c(50, 100, 150, 0, NA),
         ix_b = c(200, 250, 300, 400, NA),
         ix_c = c(200, 150, 100, 50, NA),
-        ix_d = c(200, 400, 600, 0, NA), stringsAsFactors = FALSE)
+        ix_d = c(200, 400, 600, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, basevals = c(100, 200, 25)))
     expect_equal(output, correct)
@@ -438,7 +452,8 @@ test_that("add_indices returns correct data with a different prefix", {
         d = c(50, 100, 150, 0, NA),
         index_b = c(100, 125, 150, 200, NA),
         index_c = c(100, 75, 50, 25, NA),
-        index_d = c(100, 200, 300, 0, NA), stringsAsFactors = FALSE)
+        index_d = c(100, 200, 300, 0, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_indices(data, prefix = "index_"))
     expect_equal(output, correct)

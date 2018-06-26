@@ -35,7 +35,7 @@ function will use the values in the \code{baserow} instead. The baseline
 values must not contain zeros.}
 
 \item{prefix}{A string prefix to add to the column names to identify their
-index equivalents. The default is "ix_"}
+index equivalents. The default is "ix_".}
 }
 \value{
 The input data with additional columns containing indices for

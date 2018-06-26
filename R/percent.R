@@ -66,9 +66,8 @@ add_row_percent_dfr <- function(data,
     rp <- get_row_percent_dfr(data_cols, from = 1)
 
     # Update the column names with the prefix
-    colnames(rp) <- purrr::map_chr(
-        colnames(rp),
-        ~ paste(c(prefix, .x), collapse = ""))
+    colnames(rp) <- purrr::map_chr(colnames(rp),
+                                   ~ paste(c(prefix, .x), collapse = ""))
 
     # Bind the percentage columns and return
     dplyr::bind_cols(data, rp)
@@ -163,13 +162,12 @@ add_col_percent_dfr <- function(data,
     # Get just the columns for calculating percentages
     data_cols <- data[from:to]
 
-    # Get the columns percentages
+    # Get the column percentages
     cp <- get_col_percent_dfr(data_cols, from = 1)
 
     # Update the column names with the prefix
-    colnames(cp) <- purrr::map_chr(
-        colnames(cp),
-        ~ paste(c(prefix, .x), collapse = ""))
+    colnames(cp) <- purrr::map_chr(colnames(cp),
+                                   ~ paste(c(prefix, .x), collapse = ""))
 
     # Bind the percentage columns and return
     dplyr::bind_cols(data, cp)

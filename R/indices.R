@@ -133,8 +133,10 @@ get_indices_dfr <- function(data,
 
     # Great an index for each target column and return as a tibble
     indices <- purrr::map2_dfc(from:to,
-                           basevals,
-                           ~ get_index(data[[.x]], base = base, baseval = .y))
+                               basevals,
+                               ~ get_index(data[[.x]],
+                                           base = base,
+                                           baseval = .y))
 
     # Restore the column names
     colnames(indices) <- names(data)[from:to]
@@ -200,10 +202,10 @@ add_indices_dfr <- function(data,
                             basevals = NULL,
                             prefix = "ix_") {
 
-    # Get just the columns for calculating percentages
+    # Get just the columns for calculating indices
     data_cols <- data[from:to]
 
-    # Get the columns percentages
+    # Get the column indices
     indices <- get_indices_dfr(data_cols,
                                from = 1,
                                base = base,
@@ -211,11 +213,10 @@ add_indices_dfr <- function(data,
                                basevals = basevals)
 
     # Update the column names with the prefix
-    colnames(indices) <- purrr::map_chr(
-        colnames(indices),
-        ~ paste(c(prefix, .x), collapse = ""))
+    colnames(indices) <- purrr::map_chr(colnames(indices),
+                                        ~ paste(c(prefix, .x), collapse = ""))
 
-    # Bind the percentage columns and return
+    # Bind the index columns and return
     dplyr::bind_cols(data, indices)
 }
 
@@ -246,7 +247,7 @@ add_indices_dfr <- function(data,
 #'   function will use the values in the \code{baserow} instead. The baseline
 #'   values must not contain zeros.
 #' @param prefix A string prefix to add to the column names to identify their
-#'   index equivalents. The default is "ix_"
+#'   index equivalents. The default is "ix_".
 #' @return The input data with additional columns containing indices for
 #'   columns specified by \code{from} and \code{to}.
 #' @export
@@ -259,6 +260,13 @@ add_indices <- function(data,
                         basevals = NULL,
                         prefix = "ix_") {
 
-    run_dfr_func(add_indices_dfr, data, from, to, base, baserow, basevals, prefix)
+    run_dfr_func(add_indices_dfr,
+                 data,
+                 from,
+                 to,
+                 base,
+                 baserow,
+                 basevals,
+                 prefix)
 }
 

@@ -38,3 +38,6 @@ rsconnect/
 
 # Mac files
 .DS_Store
+
+# Directories
+production
