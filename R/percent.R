@@ -6,11 +6,14 @@
 #'
 #' @keywords internal
 #'
-get_row_percent_dfr <- function(data, from = 2, to = ncol(data)) {
+get_row_percent_dfr <- function(data,
+                                from = 2,
+                                to = ncol(data),
+                                na.rm = FALSE) {
 
     # Get data as a matrix and calculate row totals
     m <- data.matrix(data[from:to])
-    rt <- rowSums(m)
+    rt <- rowSums(m, na.rm)
 
     # Calculate row percentages (if all values are zero set total to NA)
     rt <- ifelse(rt == 0, NA, rt)
@@ -38,12 +41,17 @@ get_row_percent_dfr <- function(data, from = 2, to = ncol(data)) {
 #' @param to The number or name of the column to which row percentages are
 #'   calculated. The default is ncol(data), which means row percentages are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating
+#'   percentages. The default value is FALSE.
 #' @return A tibble containing row percentages and any preceding columns.
 #' @export
 #'
-get_row_percent <- function(data, from = 2, to = ncol(data)) {
+get_row_percent <- function(data,
+                            from = 2,
+                            to = ncol(data),
+                            na.rm = FALSE) {
 
-    run_dfr_func(get_row_percent_dfr, data, from, to)
+    run_dfr_func(get_row_percent_dfr, data, from, to, na.rm)
 }
 
 #' Calculate row percentages for a set of columns in a dataframe and add
@@ -57,13 +65,14 @@ get_row_percent <- function(data, from = 2, to = ncol(data)) {
 add_row_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
+                                na.rm = FALSE,
                                 prefix = "pc_") {
 
     # Get just the columns for calculating percentages
     data_cols <- data[from:to]
 
     # Get the row percentages
-    rp <- get_row_percent_dfr(data_cols, from = 1)
+    rp <- get_row_percent_dfr(data_cols, from = 1, na.rm = na.rm)
 
     # Update the column names with the prefix
     colnames(rp) <- purrr::map_chr(colnames(rp),
@@ -84,6 +93,8 @@ add_row_percent_dfr <- function(data,
 #' @param to The number or name of the column to which row percentages are
 #'   calculated. The default is ncol(data), which means row percentages are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating
+#'   percentages. The default value is FALSE.
 #' @param prefix A string prefix to add to the column names to identify their
 #'   percentage equivalents. The default is "pc_"
 #' @return The input data with additional columns containing row percentages
@@ -93,9 +104,10 @@ add_row_percent_dfr <- function(data,
 add_row_percent <- function(data,
                             from = 2,
                             to = ncol(data),
+                            na.rm = FALSE,
                             prefix = "pc_") {
 
-    run_dfr_func(add_row_percent_dfr, data, from, to, prefix)
+    run_dfr_func(add_row_percent_dfr, data, from, to, na.rm, prefix)
 }
 
 #' Calculate column percentages for a set of columns in a dataframe without
@@ -106,11 +118,14 @@ add_row_percent <- function(data,
 #'
 #' @keywords internal
 #'
-get_col_percent_dfr <- function(data, from = 2, to = ncol(data)) {
+get_col_percent_dfr <- function(data,
+                                from = 2,
+                                to = ncol(data),
+                                na.rm = FALSE) {
 
     # Get data as a matrix and calculate column totals
     m <- data.matrix(data[from:to])
-    ct <- colSums(m)
+    ct <- colSums(m, na.rm)
 
     # Calculate column percentages (if all values are zero set total to NA)
     ct <- ifelse(ct == 0, NA, ct)
@@ -138,12 +153,17 @@ get_col_percent_dfr <- function(data, from = 2, to = ncol(data)) {
 #' @param to The number or name of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating
+#'   percentages. The default value is FALSE.
 #' @return A tibble containing column percentages and any preceding columns.
 #' @export
 #'
-get_col_percent <- function(data, from = 2, to = ncol(data)) {
+get_col_percent <- function(data,
+                            from = 2,
+                            to = ncol(data),
+                            na.rm = FALSE) {
 
-    run_dfr_func(get_col_percent_dfr, data, from, to)
+    run_dfr_func(get_col_percent_dfr, data, from, to, na.rm)
 }
 
 #' Calculate column percentages for a set of columns in a dataframe and add
@@ -157,13 +177,14 @@ get_col_percent <- function(data, from = 2, to = ncol(data)) {
 add_col_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
+                                na.rm = FALSE,
                                 prefix = "pc_") {
 
     # Get just the columns for calculating percentages
     data_cols <- data[from:to]
 
     # Get the column percentages
-    cp <- get_col_percent_dfr(data_cols, from = 1)
+    cp <- get_col_percent_dfr(data_cols, from = 1, na.rm = na.rm)
 
     # Update the column names with the prefix
     colnames(cp) <- purrr::map_chr(colnames(cp),
@@ -184,6 +205,8 @@ add_col_percent_dfr <- function(data,
 #' @param to The number or name of the column to which column percentages are
 #'   calculated. The default is ncol(data), which means column percentages
 #'   are calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating
+#'   percentages. The default value is FALSE.
 #' @param prefix A string prefix to add to the column names to identify their
 #'   percentage equivalents. The default is "pc_"
 #' @return The input data with additional columns containing column
@@ -193,7 +216,8 @@ add_col_percent_dfr <- function(data,
 add_col_percent <- function(data,
                             from = 2,
                             to = ncol(data),
+                            na.rm = FALSE,
                             prefix = "pc_") {
 
-    run_dfr_func(add_col_percent_dfr, data, from, to, prefix)
+    run_dfr_func(add_col_percent_dfr, data, from, to, na.rm, prefix)
 }

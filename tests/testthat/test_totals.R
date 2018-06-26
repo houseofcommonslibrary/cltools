@@ -8,6 +8,12 @@ data <- tibble::tibble(
     c = c(6, 7, 8, 9, 10),
     d = c(11, 12, 13, 14, 15))
 
+data_na <- tibble::tibble(
+    a = LETTERS[1:6],
+    b = c(1, 2, 3, 4, 5, 100),
+    c = c(6, 7, 8, 9, 10, 100),
+    d = c(11, 12, 13, 14, 15, NA))
+
 # Tests: get_row_totals ------------------------------------------------------
 
 test_that("get_row_totals rejects data that is not a dataframe", {
@@ -74,6 +80,17 @@ test_that("get_row_totals returns correct data with column names", {
 
     correct <- c(17, 19, 21, 23, 25)
     output <- get_row_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
+test_that("get_row_totals ignores NAs when na.rm is TRUE", {
+
+    correct <- c(18, 21, 24, 27, 30, NA)
+    output <- get_row_totals(data_na)
+    expect_equal(output, correct)
+
+    correct <- c(18, 21, 24, 27, 30, 200)
+    output <- get_row_totals(data_na, na.rm = TRUE)
     expect_equal(output, correct)
 })
 
@@ -181,6 +198,31 @@ test_that("add_row_totals returns correct data with column names", {
     expect_equal(output, correct)
 })
 
+test_that("add_row_totals ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = LETTERS[1:6],
+        b = c(1, 2, 3, 4, 5, 100),
+        c = c(6, 7, 8, 9, 10, 100),
+        d = c(11, 12, 13, 14, 15, NA),
+        total = c(18, 21, 24, 27, 30, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_row_totals(data_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a = LETTERS[1:6],
+        b = c(1, 2, 3, 4, 5, 100),
+        c = c(6, 7, 8, 9, 10, 100),
+        d = c(11, 12, 13, 14, 15, NA),
+        total = c(18, 21, 24, 27, 30, 200),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_row_totals(data_na, na.rm = TRUE))
+    expect_equal(output, correct)
+})
+
 # Tests: get_col_totals ------------------------------------------------------
 
 test_that("get_col_totals rejects data that is not a dataframe", {
@@ -247,6 +289,17 @@ test_that("get_col_totals returns correct data with column names", {
 
     correct <- c(c = 40, d = 65)
     output <- get_col_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
+test_that("get_col_totals ignores NAs when na.rm is TRUE", {
+
+    correct <- c(b = 115, c = 140, d = NA)
+    output <- get_col_totals(data_na)
+    expect_equal(output, correct)
+
+    correct <- c(b = 115, c = 140, d = 65)
+    output <- get_col_totals(data_na, na.rm = TRUE)
     expect_equal(output, correct)
 })
 
@@ -383,5 +436,28 @@ test_that("add_col_totals removes labels when lcols is NULL", {
         d = c(11, 12, 13, 14, 15, 65))
 
     output <- add_col_totals(data, lcols = NULL)
+    expect_equal(output, correct)
+})
+
+test_that("add_col_totals ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = c(LETTERS[1:6], "total"),
+        b = c(1, 2, 3, 4, 5, 100, 115),
+        c = c(6, 7, 8, 9, 10, 100, 140),
+        d = c(11, 12, 13, 14, 15, NA, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_col_totals(data_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a =  c(LETTERS[1:6], "total"),
+        b = c(1, 2, 3, 4, 5, 100, 115),
+        c = c(6, 7, 8, 9, 10, 100, 140),
+        d = c(11, 12, 13, 14, 15, NA, 65),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_col_totals(data_na, na.rm = TRUE))
     expect_equal(output, correct)
 })

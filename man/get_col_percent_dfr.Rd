@@ -5,7 +5,7 @@
 \title{Calculate column percentages for a set of columns in a dataframe without
 validation}
 \usage{
-get_col_percent_dfr(data, from = 2, to = ncol(data))
+get_col_percent_dfr(data, from = 2, to = ncol(data), na.rm = FALSE)
 }
 \description{
 This is the raw version of \code{get_col_percent}. It should only be used

@@ -5,7 +5,8 @@
 \title{Calculate row percentages for a set of columns in a dataframe and add
 them to the dataframe}
 \usage{
-add_row_percent(data, from = 2, to = ncol(data), prefix = "pc_")
+add_row_percent(data, from = 2, to = ncol(data), na.rm = FALSE,
+  prefix = "pc_")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -18,6 +19,9 @@ Use 1 if there are no preceding data columns.}
 \item{to}{The number or name of the column to which row percentages are
 calculated. The default is ncol(data), which means row percentages are
 calculated across all remaining columms in the dataframe.}
+
+\item{na.rm}{A boolean which if TRUE ignores NAs in calculating
+percentages. The default value is FALSE.}
 
 \item{prefix}{A string prefix to add to the column names to identify their
 percentage equivalents. The default is "pc_"}

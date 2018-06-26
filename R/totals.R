@@ -5,11 +5,14 @@
 #'
 #' @keywords internal
 #'
-get_row_totals_dfr <- function(data, from = 2, to = ncol(data)) {
+get_row_totals_dfr <- function(data,
+                               from = 2,
+                               to = ncol(data),
+                               na.rm = FALSE) {
 
     # Get data as a matrix and calculate row totals
     m <- data.matrix(data[from:to])
-    rowSums(m)
+    rowSums(m, na.rm)
 }
 
 #' Get row totals for a set of columns in a dataframe
@@ -26,12 +29,17 @@ get_row_totals_dfr <- function(data, from = 2, to = ncol(data)) {
 #' @param to The number or name of the column to which row totals are
 #'   calculated. The default is ncol(data), which means row totals are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
+#'   default value is FALSE.
 #' @return A numeric vetor of row totals
 #' @export
 #'
-get_row_totals <- function(data, from = 2, to = ncol(data)) {
+get_row_totals <- function(data,
+                           from = 2,
+                           to = ncol(data),
+                           na.rm = FALSE) {
 
-    run_dfr_func(get_row_totals_dfr, data, from, to)
+    run_dfr_func(get_row_totals_dfr, data, from, to, na.rm)
 }
 
 #' Add row totals for a set of columns in a dataframe without validation
@@ -44,9 +52,10 @@ get_row_totals <- function(data, from = 2, to = ncol(data)) {
 add_row_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
+                               na.rm = FALSE,
                                label = "total") {
 
-    data[[label]] <- get_row_totals_dfr(data, from, to)
+    data[[label]] <- get_row_totals_dfr(data, from, to, na.rm)
     data
 }
 
@@ -63,6 +72,8 @@ add_row_totals_dfr <- function(data,
 #' @param to The number or name of the column to which row totals are
 #'   calculated. The default is ncol(data), which means row totals are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
+#'   default value is FALSE.
 #' @param label The label for the totals column. The default is "total".
 #' @return A tibble containing row totals and any preceding columns.
 #' @export
@@ -70,9 +81,10 @@ add_row_totals_dfr <- function(data,
 add_row_totals <- function(data,
                            from = 2,
                            to = ncol(data),
+                           na.rm = FALSE,
                            label = "total") {
 
-    run_dfr_func(add_row_totals_dfr, data, from, to, label)
+    run_dfr_func(add_row_totals_dfr, data, from, to, na.rm, label)
 }
 
 #' Get column totals for a set of columns in a dataframe without validation
@@ -82,11 +94,14 @@ add_row_totals <- function(data,
 #'
 #' @keywords internal
 #'
-get_col_totals_dfr <- function(data, from = 2, to = ncol(data)) {
+get_col_totals_dfr <- function(data,
+                               from = 2,
+                               to = ncol(data),
+                               na.rm = FALSE) {
 
     # Get data as a matrix and calculate row totals
     m <- data.matrix(data[from:to])
-    colSums(m)
+    colSums(m, na.rm)
 }
 
 #' Get column totals for a set of columns in a dataframe
@@ -103,12 +118,17 @@ get_col_totals_dfr <- function(data, from = 2, to = ncol(data)) {
 #' @param to The number or name of the column to which column totals are
 #'   calculated. The default is ncol(data), which means column totals are
 #'   calculated across all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
+#'   default value is FALSE.
 #' @return A numeric vetor of column totals
 #' @export
 #'
-get_col_totals <- function(data, from = 2, to = ncol(data)) {
+get_col_totals <- function(data,
+                           from = 2,
+                           to = ncol(data),
+                           na.rm = FALSE) {
 
-    run_dfr_func(get_col_totals_dfr, data, from, to)
+    run_dfr_func(get_col_totals_dfr, data, from, to, na.rm)
 }
 
 #' Add column totals for a set of columns in a dataframe without validation
@@ -121,11 +141,12 @@ get_col_totals <- function(data, from = 2, to = ncol(data)) {
 add_col_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
+                               na.rm = FALSE,
                                label = "total",
                                lcols = 1) {
 
     # Get the column totals as a list for a totals row
-    ct_row <- as.list(get_col_totals_dfr(data, from, to))
+    ct_row <- as.list(get_col_totals_dfr(data, from, to, na.rm))
 
     # Remove invalid label column indices
     lcols <- unique(lcols)
@@ -161,6 +182,8 @@ add_col_totals_dfr <- function(data,
 #' @param to The number or name of the column to which column totals are
 #'   calculated. The default is ncol(data), which means column totals are
 #'   calculated for all remaining columms in the dataframe.
+#' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
+#'   default value is FALSE.
 #' @param label The label for the totals row. The default is "total".
 #' @param lcols A vector or scalar containing the indices of the columns to
 #'   to which to add the total label. These columns must be character vectors.
@@ -173,8 +196,9 @@ add_col_totals_dfr <- function(data,
 add_col_totals <- function(data,
                            from = 2,
                            to = ncol(data),
+                           na.rm = FALSE,
                            label = "total",
                            lcols = 1) {
 
-    run_dfr_func(add_col_totals_dfr, data, from, to, label, lcols)
+    run_dfr_func(add_col_totals_dfr, data, from, to, na.rm, label, lcols)
 }

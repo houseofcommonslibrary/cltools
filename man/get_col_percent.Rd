@@ -4,7 +4,7 @@
 \alias{get_col_percent}
 \title{Calculate column percentages for a set of columns in a dataframe}
 \usage{
-get_col_percent(data, from = 2, to = ncol(data))
+get_col_percent(data, from = 2, to = ncol(data), na.rm = FALSE)
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -17,6 +17,9 @@ Use 1 if there are no preceding data columns.}
 \item{to}{The number or name of the column to which column percentages are
 calculated. The default is ncol(data), which means column percentages are
 calculated across all remaining columms in the dataframe.}
+
+\item{na.rm}{A boolean which if TRUE ignores NAs in calculating
+percentages. The default value is FALSE.}
 }
 \value{
 A tibble containing column percentages and any preceding columns.

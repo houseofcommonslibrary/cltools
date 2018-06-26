@@ -4,8 +4,8 @@
 \alias{add_col_totals}
 \title{Add column totals for a set of columns in a dataframe}
 \usage{
-add_col_totals(data, from = 2, to = ncol(data), label = "total",
-  lcols = 1)
+add_col_totals(data, from = 2, to = ncol(data), na.rm = FALSE,
+  label = "total", lcols = 1)
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -18,6 +18,9 @@ if there are no preceding data columns.}
 \item{to}{The number or name of the column to which column totals are
 calculated. The default is ncol(data), which means column totals are
 calculated for all remaining columms in the dataframe.}
+
+\item{na.rm}{A boolean which if TRUE ignores NAs in calculating totals. The
+default value is FALSE.}
 
 \item{label}{The label for the totals row. The default is "total".}
 

@@ -9,6 +9,13 @@ data_row <- tibble::tibble(
     d = c(3, 1, 2, 0, NA),
     e = c(0, 0, 0, 0, NA))
 
+data_row_na <- tibble::tibble(
+    a = LETTERS[1:5],
+    b = c(1, 2, 3, 0, 1),
+    c = c(2, 3, 1, 0, 2),
+    d = c(3, 1, 2, 0, 3),
+    e = c(0, 0, 0, 0, NA))
+
 data_col <- tibble::tibble(
     a = LETTERS[1:4],
     b = c(1, 2, 3, 0),
@@ -16,6 +23,14 @@ data_col <- tibble::tibble(
     d = c(3, 1, 2, 0),
     e = c(0, 0, 0, 0),
     f = c(0, 0, 0, NA))
+
+data_col_na <- tibble::tibble(
+    a = LETTERS[1:4],
+    b = c(1, 2, 3, 0),
+    c = c(2, 3, 1, 0),
+    d = c(3, 1, 2, 0),
+    e = c(0, 0, 0, 0),
+    f = c(1, 2, 3, NA))
 
 # Tests: get_row_percent -----------------------------------------------------
 
@@ -65,7 +80,8 @@ test_that("get_row_percent returns correct data with defaults", {
         b = c(1/6, 2/6, 3/6, NA, NA),
         c = c(2/6, 3/6, 1/6, NA, NA),
         d = c(3/6, 1/6, 2/6, NA, NA),
-        e = c(0/6, 0/6, 0/6, NA, NA), stringsAsFactors = FALSE)
+        e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_row_percent(data_row))
     expect_equal(output, correct)
@@ -78,7 +94,8 @@ test_that("get_row_percent returns correct data with more label columns", {
         b = c(1, 2, 3, 0, NA),
         c = c(2/5, 3/4, 1/3, NA, NA),
         d = c(3/5, 1/4, 2/3, NA, NA),
-        e = c(0/5, 0/4, 0/3, NA, NA), stringsAsFactors = FALSE)
+        e = c(0/5, 0/4, 0/3, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_row_percent(data_row, from = 3))
     expect_equal(output, correct)
@@ -89,7 +106,8 @@ test_that("get_row_percent returns correct data with fewer data columns", {
     correct <- data.frame(
         a = LETTERS[1:5],
         b = c(1/3, 2/5, 3/4, NA, NA),
-        c = c(2/3, 3/5, 1/4, NA, NA), stringsAsFactors = FALSE)
+        c = c(2/3, 3/5, 1/4, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_row_percent(data_row, to = 3))
     expect_equal(output, correct)
@@ -102,9 +120,35 @@ test_that("get_row_percent returns correct data with column names", {
         b = c(1, 2, 3, 0, NA),
         c = c(2/5, 3/4, 1/3, NA, NA),
         d = c(3/5, 1/4, 2/3, NA, NA),
-        e = c(0/5, 0/4, 0/3, NA, NA), stringsAsFactors = FALSE)
+        e = c(0/5, 0/4, 0/3, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_row_percent(data_row, from = "c", to = "e"))
+    expect_equal(output, correct)
+})
+
+test_that("get_row_percent ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = LETTERS[1:5],
+        b = c(1/6, 2/6, 3/6, NA, NA),
+        c = c(2/6, 3/6, 1/6, NA, NA),
+        d = c(3/6, 1/6, 2/6, NA, NA),
+        e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(get_row_percent(data_row_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a = LETTERS[1:5],
+        b = c(1/6, 2/6, 3/6, NA, 1/6),
+        c = c(2/6, 3/6, 1/6, NA, 2/6),
+        d = c(3/6, 1/6, 2/6, NA, 3/6),
+        e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(get_row_percent(data_row_na, na.rm = TRUE))
     expect_equal(output, correct)
 })
 
@@ -160,7 +204,8 @@ test_that("add_row_percent returns correct data with defaults", {
         pc_b = c(1/6, 2/6, 3/6, NA, NA),
         pc_c = c(2/6, 3/6, 1/6, NA, NA),
         pc_d = c(3/6, 1/6, 2/6, NA, NA),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA), stringsAsFactors = FALSE)
+        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row))
     expect_equal(output, correct)
@@ -176,7 +221,8 @@ test_that("add_row_percent returns correct data with more label columns", {
         e = c(0, 0, 0, 0, NA),
         pc_c = c(2/5, 3/4, 1/3, NA, NA),
         pc_d = c(3/5, 1/4, 2/3, NA, NA),
-        pc_e = c(0/5, 0/4, 0/3, NA, NA), stringsAsFactors = FALSE)
+        pc_e = c(0/5, 0/4, 0/3, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, from = 3))
     expect_equal(output, correct)
@@ -192,7 +238,8 @@ test_that("add_row_percent returns correct data without a label column", {
         pc_b = c(1/6, 2/6, 3/6, NA, NA),
         pc_c = c(2/6, 3/6, 1/6, NA, NA),
         pc_d = c(3/6, 1/6, 2/6, NA, NA),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA), stringsAsFactors = FALSE)
+        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(
         add_row_percent(data_row[2:ncol(data_row)], from = 1))
@@ -208,7 +255,8 @@ test_that("add_row_percent returns correct data with fewer data columns", {
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
         pc_b = c(1/3, 2/5, 3/4, NA, NA),
-        pc_c = c(2/3, 3/5, 1/4, NA, NA), stringsAsFactors = FALSE)
+        pc_c = c(2/3, 3/5, 1/4, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, to = 3))
     expect_equal(output, correct)
@@ -224,7 +272,8 @@ test_that("add_row_percent returns correct data with column names", {
         e = c(0, 0, 0, 0, NA),
         pc_c = c(2/5, 3/4, 1/3, NA, NA),
         pc_d = c(3/5, 1/4, 2/3, NA, NA),
-        pc_e = c(0/5, 0/4, 0/3, NA, NA), stringsAsFactors = FALSE)
+        pc_e = c(0/5, 0/4, 0/3, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, from = "c", to = "e"))
     expect_equal(output, correct)
@@ -241,9 +290,43 @@ test_that("add_row_percent returns correct data with a different prefix", {
         percent_b = c(1/6, 2/6, 3/6, NA, NA),
         percent_c = c(2/6, 3/6, 1/6, NA, NA),
         percent_d = c(3/6, 1/6, 2/6, NA, NA),
-        percent_e = c(0/6, 0/6, 0/6, NA, NA), stringsAsFactors = FALSE)
+        percent_e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, prefix = "percent_"))
+    expect_equal(output, correct)
+})
+
+test_that("add_row_percent ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = LETTERS[1:5],
+        b = c(1, 2, 3, 0, 1),
+        c = c(2, 3, 1, 0, 2),
+        d = c(3, 1, 2, 0, 3),
+        e = c(0, 0, 0, 0, NA),
+        pc_b = c(1/6, 2/6, 3/6, NA, NA),
+        pc_c = c(2/6, 3/6, 1/6, NA, NA),
+        pc_d = c(3/6, 1/6, 2/6, NA, NA),
+        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_row_percent(data_row_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a = LETTERS[1:5],
+        b = c(1, 2, 3, 0, 1),
+        c = c(2, 3, 1, 0, 2),
+        d = c(3, 1, 2, 0, 3),
+        e = c(0, 0, 0, 0, NA),
+        pc_b = c(1/6, 2/6, 3/6, NA, 1/6),
+        pc_c = c(2/6, 3/6, 1/6, NA, 2/6),
+        pc_d = c(3/6, 1/6, 2/6, NA, 3/6),
+        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_row_percent(data_row_na, na.rm = TRUE))
     expect_equal(output, correct)
 })
 
@@ -296,7 +379,8 @@ test_that("get_col_percent returns correct data with defaults", {
         c = c(2/6, 3/6, 1/6, 0/6),
         d = c(3/6, 1/6, 2/6, 0/6),
         e = as.numeric(c(NA, NA, NA, NA)),
-        f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_col_percent(data_col))
     expect_equal(output, correct)
@@ -310,7 +394,8 @@ test_that("get_col_percent returns correct data with more label columns", {
         c = c(2/6, 3/6, 1/6, 0/6),
         d = c(3/6, 1/6, 2/6, 0/6),
         e = as.numeric(c(NA, NA, NA, NA)),
-        f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_col_percent(data_col, from = 3))
     expect_equal(output, correct)
@@ -321,7 +406,8 @@ test_that("get_col_percent returns correct data with fewer data columns", {
     correct <- data.frame(
         a = LETTERS[1:4],
         b = c(1/6, 2/6, 3/6, 0/6),
-        c = c(2/6, 3/6, 1/6, 0/6), stringsAsFactors = FALSE)
+        c = c(2/6, 3/6, 1/6, 0/6),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_col_percent(data_col, to = 3))
     expect_equal(output, correct)
@@ -335,9 +421,37 @@ test_that("get_col_percent returns correct data with column names", {
         c = c(2/6, 3/6, 1/6, 0/6),
         d = c(3/6, 1/6, 2/6, 0/6),
         e = as.numeric(c(NA, NA, NA, NA)),
-        f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(get_col_percent(data_col, from = "c", to = "f"))
+    expect_equal(output, correct)
+})
+
+test_that("get_col_percent ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = LETTERS[1:4],
+        b = c(1/6, 2/6, 3/6, 0/6),
+        c = c(2/6, 3/6, 1/6, 0/6),
+        d = c(3/6, 1/6, 2/6, 0/6),
+        e = as.numeric(c(NA, NA, NA, NA)),
+        f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(get_col_percent(data_col_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a = LETTERS[1:4],
+        b = c(1/6, 2/6, 3/6, 0/6),
+        c = c(2/6, 3/6, 1/6, 0/6),
+        d = c(3/6, 1/6, 2/6, 0/6),
+        e = as.numeric(c(NA, NA, NA, NA)),
+        f = as.numeric(c(1/6, 2/6, 3/6, NA)),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(get_col_percent(data_col_na, na.rm = TRUE))
     expect_equal(output, correct)
 })
 
@@ -395,7 +509,8 @@ test_that("add_col_percent returns correct data with defaults", {
         pc_c = c(2/6, 3/6, 1/6, 0/6),
         pc_d = c(3/6, 1/6, 2/6, 0/6),
         pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col))
     expect_equal(output, correct)
@@ -413,7 +528,8 @@ test_that("add_col_percent returns correct data with more label columns", {
         pc_c = c(2/6, 3/6, 1/6, 0/6),
         pc_d = c(3/6, 1/6, 2/6, 0/6),
         pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, from = 3))
     expect_equal(output, correct)
@@ -431,7 +547,8 @@ test_that("add_col_percent returns correct data without a label column", {
         pc_c = c(2/6, 3/6, 1/6, 0/6),
         pc_d = c(3/6, 1/6, 2/6, 0/6),
         pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(
         add_col_percent(data_col[2:ncol(data_col)], from = 1))
@@ -448,7 +565,8 @@ test_that("add_col_percent returns correct data with fewer data columns", {
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
         pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6), stringsAsFactors = FALSE)
+        pc_c = c(2/6, 3/6, 1/6, 0/6),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, to = 3))
     expect_equal(output, correct)
@@ -466,7 +584,8 @@ test_that("add_col_percent returns correct data with column names", {
         pc_c = c(2/6, 3/6, 1/6, 0/6),
         pc_d = c(3/6, 1/6, 2/6, 0/6),
         pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, from = "c", to = "f"))
     expect_equal(output, correct)
@@ -485,8 +604,46 @@ test_that("add_col_percent returns correct data with a different prefix", {
         percent_c = c(2/6, 3/6, 1/6, 0/6),
         percent_d = c(3/6, 1/6, 2/6, 0/6),
         percent_e = as.numeric(c(NA, NA, NA, NA)),
-        percent_f = as.numeric(c(NA, NA, NA, NA)), stringsAsFactors = FALSE)
+        percent_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, prefix = "percent_"))
+    expect_equal(output, correct)
+})
+
+test_that("add_col_percent ignores NAs when na.rm is TRUE", {
+
+    correct <- data.frame(
+        a = LETTERS[1:4],
+        b = c(1, 2, 3, 0),
+        c = c(2, 3, 1, 0),
+        d = c(3, 1, 2, 0),
+        e = c(0, 0, 0, 0),
+        f = c(1, 2, 3, NA),
+        pc_b = c(1/6, 2/6, 3/6, 0/6),
+        pc_c = c(2/6, 3/6, 1/6, 0/6),
+        pc_d = c(3/6, 1/6, 2/6, 0/6),
+        pc_e = as.numeric(c(NA, NA, NA, NA)),
+        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_col_percent(data_col_na))
+    expect_equal(output, correct)
+
+    correct <- data.frame(
+        a = LETTERS[1:4],
+        b = c(1, 2, 3, 0),
+        c = c(2, 3, 1, 0),
+        d = c(3, 1, 2, 0),
+        e = c(0, 0, 0, 0),
+        f = c(1, 2, 3, NA),
+        pc_b = c(1/6, 2/6, 3/6, 0/6),
+        pc_c = c(2/6, 3/6, 1/6, 0/6),
+        pc_d = c(3/6, 1/6, 2/6, 0/6),
+        pc_e = as.numeric(c(NA, NA, NA, NA)),
+        pc_f = as.numeric(c(1/6, 2/6, 3/6, NA)),
+        stringsAsFactors = FALSE)
+
+    output <- as.data.frame(add_col_percent(data_col_na, na.rm = TRUE))
     expect_equal(output, correct)
 })

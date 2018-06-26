@@ -4,7 +4,7 @@
 \alias{get_row_totals_dfr}
 \title{Get row totals for a set of columns in a dataframe without validation}
 \usage{
-get_row_totals_dfr(data, from = 2, to = ncol(data))
+get_row_totals_dfr(data, from = 2, to = ncol(data), na.rm = FALSE)
 }
 \description{
 This is the raw version of \code{get_row_totals}. It should only be used

@@ -4,7 +4,7 @@
 \alias{get_row_totals}
 \title{Get row totals for a set of columns in a dataframe}
 \usage{
-get_row_totals(data, from = 2, to = ncol(data))
+get_row_totals(data, from = 2, to = ncol(data), na.rm = FALSE)
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -17,6 +17,9 @@ if there are no preceding data columns.}
 \item{to}{The number or name of the column to which row totals are
 calculated. The default is ncol(data), which means row totals are
 calculated across all remaining columms in the dataframe.}
+
+\item{na.rm}{A boolean which if TRUE ignores NAs in calculating totals. The
+default value is FALSE.}
 }
 \value{
 A numeric vetor of row totals

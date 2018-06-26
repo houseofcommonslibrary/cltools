@@ -4,7 +4,8 @@
 \alias{add_row_totals}
 \title{Add row totals for a set of columns in a dataframe}
 \usage{
-add_row_totals(data, from = 2, to = ncol(data), label = "total")
+add_row_totals(data, from = 2, to = ncol(data), na.rm = FALSE,
+  label = "total")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -17,6 +18,9 @@ if there are no preceding data columns.}
 \item{to}{The number or name of the column to which row totals are
 calculated. The default is ncol(data), which means row totals are
 calculated across all remaining columms in the dataframe.}
+
+\item{na.rm}{A boolean which if TRUE ignores NAs in calculating totals. The
+default value is FALSE.}
 
 \item{label}{The label for the totals column. The default is "total".}
 }
