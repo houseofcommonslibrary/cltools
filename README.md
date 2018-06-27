@@ -41,6 +41,7 @@ data <- tibble::tibble(
     c = c(6, 7, 8, 9, 10),
     d = c(11, 12, 13, 14, 15))
 
+data
 # # A tibble: 5 x 4
 #   a         b     c     d
 #   <chr> <dbl> <dbl> <dbl>
@@ -127,6 +128,7 @@ data <- tibble::tibble(
     d = c(6, 7, 8, 9, 10),
     e = c(11, 12, 13, 14, 15))
 
+data
 # # A tibble: 5 x 5
 #   a     b         c     d     e
 #   <chr> <chr> <dbl> <dbl> <dbl>
@@ -191,6 +193,7 @@ data <- tibble::tibble(
     c = c(1, 2, 3),
     d = c(2, 4, 6))
 
+data
 # # A tibble: 3 x 4
 #   a         b     c     d
 #   <chr> <dbl> <dbl> <dbl>
@@ -329,6 +332,7 @@ data <- tibble::tibble(
     c = c(4, 4, 4, 4, 4, 40),
     d = c(6, 6, 6, 6, 6, NA))
 
+data
 # # A tibble: 6 x 4
 #   a         b     c     d
 #   <chr> <dbl> <dbl> <dbl>
@@ -418,7 +422,8 @@ data <- tibble::tibble(
     b = c(200, 250, 300, 400),
     c = c(400, 300, 200, 100),
     d = c(50, 100, 150, 0))
-    
+
+data    
 # # A tibble: 4 x 4
 #   a         b     c     d
 #   <chr> <dbl> <dbl> <dbl>
@@ -509,7 +514,8 @@ data <- tibble::tibble(
     b = c(204, 219, 240, 258, 272),
     c = c(100, 100, 100, 100, 100),
     d = c(91.478, 93.975, 95.389, 97.978, 100.0))
-    
+
+data    
 # # A tibble: 5 x 4
 #   a         b     c     d
 #   <chr> <dbl> <dbl> <dbl>
