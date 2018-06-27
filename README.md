@@ -493,7 +493,7 @@ get_index(data, base = 1000, baseval = 500)
 
 ### Deflators and real terms series
 
-Functions for real terms series provide a simple way to deflate prices stored in columns in a dataframe. The principal arguments are the input dataframe and a vector containing the deflator used to deflate the prices. These functions use the `from` and `to` arguments to identify the target columns. By default they target all columns other than the first. 
+Functions for real terms series provide a simple way to deflate prices stored in columns in a dataframe. The principal arguments are the input dataframe and a vector containing the deflator to use to deflate the prices. These functions use the `from` and `to` arguments to identify the target columns. By default they target all columns other than the first. 
 
 `get_real` returns a dataframe containing real terms series created for each of the target columns along with any columns preceding the targets. This function uses two arguments other than the input dataframe to control the properties of the real terms series created.
 
