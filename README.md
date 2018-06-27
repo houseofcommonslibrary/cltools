@@ -495,9 +495,9 @@ get_index(data, base = 1000, baseval = 500)
 
 Functions for real terms series provide a simple way to deflate prices stored in columns in a dataframe. The principal arguments are the input dataframe and a vector containing the deflator to use to deflate the prices. These functions use the `from` and `to` arguments to identify the target columns. By default they target all columns other than the first. 
 
-`get_real` returns a dataframe containing real terms series created for each of the target columns along with any columns preceding the targets. This function uses two arguments other than the input dataframe to control the properties of the real terms series created.
+`get_real` returns a dataframe containing real terms series created for each of the target columns using the given deflator, along with any columns preceding the targets. This function uses two arguments other than the input dataframe to control the properties of the real terms series created.
 
-The `deflator` is a vector containing the deflator series used to adjust the prices in the target columns. The `deflator` must have the same number of elements as there are rows in the dataframe. If the deflator series is a column in the dataframe, just pass it to the `deflator` argument as `data$deflator`.
+The `deflator` is a vector containing the deflator series used to adjust the prices in the target columns. The `deflator` must have the same number of elements as there are rows in the dataframe. If the deflator series is a column in the dataframe, just pass it as the `deflator` argument with `data$deflator`.
 
 The `baserow` is the row number to use as the baseline for the adjusted prices i.e. it identifies the row in the table that represents the period to which prices will be adjusted. The default value of `baserow` is the last row of the table, which is assumed to be the most recent period.
 
