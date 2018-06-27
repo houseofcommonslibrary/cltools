@@ -406,7 +406,7 @@ get_col_percent(data, na.rm = TRUE)
 # 6 F     0.667  0.667   NA 
 ```
 
-If a row or column **sums** to zero, percentages calculated for that row or column will be NAs. This happens irrespective of the value of `na.rm`: you can't use zero as a denominator.
+If a row or column sums to zero, percentages calculated for that row or column will be NAs. This happens irrespective of the value of `na.rm`: you can't use zero as a denominator.
 
 ### Statistical indices
 
