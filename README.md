@@ -4,7 +4,7 @@ A collection of data wrangling tools for statistical researchers. This package i
 
 The package provides functions for manipulating tabular data stored in dataframes. It is desgined to make it easier to perform routine transformations of data that researchers often use, but which can be error prone when done in Excel, especially with larger datasets. An experienced R user could accomplish most these operations directly without much difficulty, but a design goal of this package is to make it easier for researchers to be producive with R at lower levels of expertise.
 
-This package is in active development and I would welcome any feedback. The currently available API is set out in the [contents](https://github.com/olihawkins/cltools#contents) below. Any functions documented here are ready to use: they have good test coverage and documentation. Further functions may be added over time. I cannot currently guarantee there will be no breaking changes to the API in future, as the package is new and may evolve in response to feedback from users. However, functions documented in this README are much less likely to change than those in development.
+This package is in active development and I would welcome any feedback. The currently available API is set out in the [contents](https://github.com/olihawkins/cltools#contents) below. Any functions documented here are ready to use: they have good test coverage and documentation. Further functions may be added over time. I cannot currently guarantee there will be no breaking changes to the API in future, as the package is new and may evolve in response to feedback from users. However, functions documented in this README are less likely to change than those in development.
 
 ## Installation
 
@@ -178,7 +178,7 @@ add_col_totals(data, from = "c", label = "all", lcols = c(1, 2))
 # 6 all   all      15    40    65
 ```
 
-Adding column totals to a dataframe is not very "tidy", but may be useful as a final step before outputting tabular data for presentation.
+Adding column totals to a dataframe is not [tidy](https://en.wikipedia.org/wiki/Tidy_data), but may be useful as a final step before outputting tabular data for presentation.
 
 ### Row and column percentages
 
@@ -487,13 +487,13 @@ data <- c(200, 250, 300, 350, 400)
 get_index(data, base = 1000, basepos = 5)
 # [1]  500  625  750  875 1000
 
-get_index(data, base = 1000, baseval = 5)
+get_index(data, base = 1000, baseval = 500)
 # [1] 400 500 600 700 800
 ```
 
 ### Deflators and real terms series
 
-Functions for real terms series provide a simple way to deflate prices stored in columns in a dataframe. The principal arguments are the input dataframe and a vector containing the deflator. These functions use the `from` and `to` arguments to identify the target columns. By default they target all columns other than the first. 
+Functions for real terms series provide a simple way to deflate prices stored in columns in a dataframe. The principal arguments are the input dataframe and a vector containing the deflator used to deflate the prices. These functions use the `from` and `to` arguments to identify the target columns. By default they target all columns other than the first. 
 
 `get_real` returns a dataframe containing real terms series created for each of the target columns along with any columns preceding the targets. This function uses two arguments other than the input dataframe to control the properties of the real terms series created.
 
