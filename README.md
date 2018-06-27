@@ -26,7 +26,7 @@ devtools::install_github("olihawkins/cltools")
 
 ### Core principles
 
-The functions in this package are designed to operate on tabuler data stored in dataframes and tibbles. A common pattern involves prodcuing new data from a set of columns in the dataframe. Target columns are specified with the `from` and `to` arguments. These arguments can be numerical column indices or column names as strings. If the columns you want to process are not adjacent to one another, simply reorder them with [dplyr::select](https://dplyr.tidyverse.org/reference/select.html) -- some good examples of how to use `select` can be found [here](http://r4ds.had.co.nz/transform.html#select).
+The functions in this package are designed to operate on tabular data stored in dataframes and tibbles. A common pattern involves prodcuing new data from a set of columns in the dataframe. Target columns are specified with `from` and `to` arguments. These arguments can be numerical column indices or column names as strings. If the columns you want to process are not adjacent to one another, simply reorder them with [dplyr::select](https://dplyr.tidyverse.org/reference/select.html) -- some good examples of how to use `select` can be found [here](http://r4ds.had.co.nz/transform.html#select).
 
 Functions prefixed `get_` will return the newly generated data. In some cases, the newly generated data will be returned along with any columns preceding the target columns in the input dataframe, which are presumed to be labels or other data you want to preserve. Functions prefixed with `add_` return the whole of the input dataframe with the newly generated columns of data appended to the end.
 
@@ -118,7 +118,7 @@ add_col_totals(data)
 # 6 total    15    40    65
 ```
 
-The `lcols` argument can be used to specify which columns should receive a label for totals. 
+The `lcols` argument can be used to specify which columns should receive the label for totals. 
 
 ``` r
 data <- tibble::tibble(
@@ -289,7 +289,7 @@ add_col_percent(data)
 
 ```
 
-As before, these functions take `from` and `to` arguments to specify the target rows.
+As before, these functions take `from` and `to` arguments to specify the target columns.
 
 ``` r
 add_row_percent(data, from = "c")
@@ -406,7 +406,7 @@ get_col_percent(data, na.rm = TRUE)
 # 6 F     0.667  0.667   NA 
 ```
 
-If a row or column sums to zero, percentages calculated for that row or column will be NAs. This happens irrespective of the value of `na.rm`: you can't use zero as a denominator.
+If a row or column **sums** to zero, percentages calculated for that row or column will be NAs. This happens irrespective of the value of `na.rm`: you can't use zero as a denominator.
 
 ### Statistical indices
 
