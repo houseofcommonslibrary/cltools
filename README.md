@@ -26,7 +26,7 @@ devtools::install_github("olihawkins/cltools")
 
 ### Core principles
 
-The functions in this package are designed to operate on tabular data stored in dataframes and tibbles. A common pattern involves prodcuing new data from a set of columns in the dataframe. Target columns are specified with `from` and `to` arguments. These arguments can be numerical column indices or column names as strings. If the columns you want to process are not adjacent to one another, simply reorder them with [dplyr::select](https://dplyr.tidyverse.org/reference/select.html) -- some good examples of how to use `select` can be found [here](http://r4ds.had.co.nz/transform.html#select).
+The functions in this package are designed to operate on tabular data stored in dataframes and tibbles. A common pattern involves producing new data from a set of columns in the dataframe. Target columns are specified with `from` and `to` arguments. These arguments can be numerical column indices or column names as strings. If the columns you want to process are not adjacent to one another, simply reorder them with [dplyr::select](https://dplyr.tidyverse.org/reference/select.html) -- some good examples of how to use `select` can be found [here](http://r4ds.had.co.nz/transform.html#select).
 
 Functions prefixed `get_` will return the newly generated data. In some cases, the newly generated data will be returned along with any columns preceding the target columns in the input dataframe, which are presumed to be labels or other data you want to preserve. Functions prefixed with `add_` return the whole of the input dataframe with the newly generated columns of data appended to the end.
 
