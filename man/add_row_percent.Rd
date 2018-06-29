@@ -6,7 +6,7 @@
 them to the dataframe}
 \usage{
 add_row_percent(data, from = 2, to = ncol(data), na.rm = FALSE,
-  prefix = "pc_")
+  prefix = "rp_")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be
@@ -24,7 +24,7 @@ calculated across all remaining columms in the dataframe.}
 percentages. The default value is FALSE.}
 
 \item{prefix}{A string prefix to add to the column names to identify their
-percentage equivalents. The default is "pc_"}
+percentage equivalents. The default is "rp_"}
 }
 \value{
 The input data with additional columns containing row percentages

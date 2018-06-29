@@ -273,7 +273,7 @@ Row and column percentages can be added to the input dataframe using `add_row_pe
 ``` r
 add_row_percent(data)
 # # A tibble: 3 x 7
-#   a         b     c     d  pc_b  pc_c  pc_d
+#   a         b     c     d  rp_b  rp_c  rp_d
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 # 1 A         1     1     2  0.25  0.25   0.5
 # 2 B         2     2     4  0.25  0.25   0.5
@@ -281,7 +281,7 @@ add_row_percent(data)
 
 add_col_percent(data)
 # # A tibble: 3 x 7
-#   a         b     c     d  pc_b  pc_c  pc_d
+#   a         b     c     d  cp_b  cp_c  cp_d
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 # 1 A         1     1     2 0.167 0.167 0.167
 # 2 B         2     2     4 0.333 0.333 0.333
@@ -294,7 +294,7 @@ As before, these functions take `from` and `to` arguments to specify the target 
 ``` r
 add_row_percent(data, from = "c")
 # # A tibble: 3 x 6
-#   a         b     c     d  pc_c  pc_d
+#   a         b     c     d  rp_c  rp_d
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
 # 1 A         1     1     2 0.333 0.667
 # 2 B         2     2     4 0.333 0.667
@@ -302,14 +302,14 @@ add_row_percent(data, from = "c")
 
 add_col_percent(data, to = "c")
 # # A tibble: 3 x 6
-#   a         b     c     d  pc_b  pc_c
+#   a         b     c     d  cp_b  cp_c
 #   <chr> <dbl> <dbl> <dbl> <dbl> <dbl>
 # 1 A         1     1     2 0.167 0.167
 # 2 B         2     2     4 0.333 0.333
 # 3 C         3     3     6 0.5   0.5 
 ```
 
-The percentage columns that are added to the dataframe take the name of their source column with a prefix. The default prefix for percentages is `pc_` but this can be set with the `prefix` argument.
+The percentage columns that are added to the dataframe take the name of their source column with a prefix. The default prefix for row percentages is `rp_`, and the default prefix for column percentages is `cp_`, but these can be set with the `prefix` argument.
 
 ``` r
 add_row_percent(data, prefix = "percent_")

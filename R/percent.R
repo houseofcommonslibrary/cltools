@@ -66,7 +66,7 @@ add_row_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
                                 na.rm = FALSE,
-                                prefix = "pc_") {
+                                prefix = "rp_") {
 
     # Get just the columns for calculating percentages
     data_cols <- data[from:to]
@@ -96,7 +96,7 @@ add_row_percent_dfr <- function(data,
 #' @param na.rm A boolean which if TRUE ignores NAs in calculating
 #'   percentages. The default value is FALSE.
 #' @param prefix A string prefix to add to the column names to identify their
-#'   percentage equivalents. The default is "pc_"
+#'   percentage equivalents. The default is "rp_"
 #' @return The input data with additional columns containing row percentages
 #'   for columns specified by \code{from} and \code{to}.
 #' @export
@@ -105,7 +105,7 @@ add_row_percent <- function(data,
                             from = 2,
                             to = ncol(data),
                             na.rm = FALSE,
-                            prefix = "pc_") {
+                            prefix = "rp_") {
 
     run_dfr_func(add_row_percent_dfr, data, from, to, na.rm, prefix)
 }
@@ -178,7 +178,7 @@ add_col_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
                                 na.rm = FALSE,
-                                prefix = "pc_") {
+                                prefix = "cp_") {
 
     # Get just the columns for calculating percentages
     data_cols <- data[from:to]
@@ -208,7 +208,7 @@ add_col_percent_dfr <- function(data,
 #' @param na.rm A boolean which if TRUE ignores NAs in calculating
 #'   percentages. The default value is FALSE.
 #' @param prefix A string prefix to add to the column names to identify their
-#'   percentage equivalents. The default is "pc_"
+#'   percentage equivalents. The default is "cp_"
 #' @return The input data with additional columns containing column
 #'   percentages for columns specified by \code{from} and \code{to}.
 #' @export
@@ -217,7 +217,7 @@ add_col_percent <- function(data,
                             from = 2,
                             to = ncol(data),
                             na.rm = FALSE,
-                            prefix = "pc_") {
+                            prefix = "cp_") {
 
     run_dfr_func(add_col_percent_dfr, data, from, to, na.rm, prefix)
 }

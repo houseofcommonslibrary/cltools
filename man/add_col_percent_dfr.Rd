@@ -6,7 +6,7 @@
 them to the dataframe without validation}
 \usage{
 add_col_percent_dfr(data, from = 2, to = ncol(data), na.rm = FALSE,
-  prefix = "pc_")
+  prefix = "cp_")
 }
 \description{
 This is the raw version of \code{add_col_percent}. It should only be used

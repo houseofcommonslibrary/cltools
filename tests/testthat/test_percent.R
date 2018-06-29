@@ -201,10 +201,10 @@ test_that("add_row_percent returns correct data with defaults", {
         c = c(2, 3, 1, 0, NA),
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, NA, NA),
-        pc_c = c(2/6, 3/6, 1/6, NA, NA),
-        pc_d = c(3/6, 1/6, 2/6, NA, NA),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        rp_b = c(1/6, 2/6, 3/6, NA, NA),
+        rp_c = c(2/6, 3/6, 1/6, NA, NA),
+        rp_d = c(3/6, 1/6, 2/6, NA, NA),
+        rp_e = c(0/6, 0/6, 0/6, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row))
@@ -219,9 +219,9 @@ test_that("add_row_percent returns correct data with more label columns", {
         c = c(2, 3, 1, 0, NA),
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
-        pc_c = c(2/5, 3/4, 1/3, NA, NA),
-        pc_d = c(3/5, 1/4, 2/3, NA, NA),
-        pc_e = c(0/5, 0/4, 0/3, NA, NA),
+        rp_c = c(2/5, 3/4, 1/3, NA, NA),
+        rp_d = c(3/5, 1/4, 2/3, NA, NA),
+        rp_e = c(0/5, 0/4, 0/3, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, from = 3))
@@ -235,10 +235,10 @@ test_that("add_row_percent returns correct data without a label column", {
         c = c(2, 3, 1, 0, NA),
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, NA, NA),
-        pc_c = c(2/6, 3/6, 1/6, NA, NA),
-        pc_d = c(3/6, 1/6, 2/6, NA, NA),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        rp_b = c(1/6, 2/6, 3/6, NA, NA),
+        rp_c = c(2/6, 3/6, 1/6, NA, NA),
+        rp_d = c(3/6, 1/6, 2/6, NA, NA),
+        rp_e = c(0/6, 0/6, 0/6, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(
@@ -254,8 +254,8 @@ test_that("add_row_percent returns correct data with fewer data columns", {
         c = c(2, 3, 1, 0, NA),
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
-        pc_b = c(1/3, 2/5, 3/4, NA, NA),
-        pc_c = c(2/3, 3/5, 1/4, NA, NA),
+        rp_b = c(1/3, 2/5, 3/4, NA, NA),
+        rp_c = c(2/3, 3/5, 1/4, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, to = 3))
@@ -270,9 +270,9 @@ test_that("add_row_percent returns correct data with column names", {
         c = c(2, 3, 1, 0, NA),
         d = c(3, 1, 2, 0, NA),
         e = c(0, 0, 0, 0, NA),
-        pc_c = c(2/5, 3/4, 1/3, NA, NA),
-        pc_d = c(3/5, 1/4, 2/3, NA, NA),
-        pc_e = c(0/5, 0/4, 0/3, NA, NA),
+        rp_c = c(2/5, 3/4, 1/3, NA, NA),
+        rp_d = c(3/5, 1/4, 2/3, NA, NA),
+        rp_e = c(0/5, 0/4, 0/3, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row, from = "c", to = "e"))
@@ -305,10 +305,10 @@ test_that("add_row_percent ignores NAs when na.rm is TRUE", {
         c = c(2, 3, 1, 0, 2),
         d = c(3, 1, 2, 0, 3),
         e = c(0, 0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, NA, NA),
-        pc_c = c(2/6, 3/6, 1/6, NA, NA),
-        pc_d = c(3/6, 1/6, 2/6, NA, NA),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        rp_b = c(1/6, 2/6, 3/6, NA, NA),
+        rp_c = c(2/6, 3/6, 1/6, NA, NA),
+        rp_d = c(3/6, 1/6, 2/6, NA, NA),
+        rp_e = c(0/6, 0/6, 0/6, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row_na))
@@ -320,10 +320,10 @@ test_that("add_row_percent ignores NAs when na.rm is TRUE", {
         c = c(2, 3, 1, 0, 2),
         d = c(3, 1, 2, 0, 3),
         e = c(0, 0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, NA, 1/6),
-        pc_c = c(2/6, 3/6, 1/6, NA, 2/6),
-        pc_d = c(3/6, 1/6, 2/6, NA, 3/6),
-        pc_e = c(0/6, 0/6, 0/6, NA, NA),
+        rp_b = c(1/6, 2/6, 3/6, NA, 1/6),
+        rp_c = c(2/6, 3/6, 1/6, NA, 2/6),
+        rp_d = c(3/6, 1/6, 2/6, NA, 3/6),
+        rp_e = c(0/6, 0/6, 0/6, NA, NA),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_row_percent(data_row_na, na.rm = TRUE))
@@ -505,11 +505,11 @@ test_that("add_col_percent returns correct data with defaults", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        cp_b = c(1/6, 2/6, 3/6, 0/6),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(NA, NA, NA, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col))
@@ -525,10 +525,10 @@ test_that("add_col_percent returns correct data with more label columns", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(NA, NA, NA, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, from = 3))
@@ -543,11 +543,11 @@ test_that("add_col_percent returns correct data without a label column", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        cp_b = c(1/6, 2/6, 3/6, 0/6),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(NA, NA, NA, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(
@@ -564,8 +564,8 @@ test_that("add_col_percent returns correct data with fewer data columns", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
-        pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_b = c(1/6, 2/6, 3/6, 0/6),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, to = 3))
@@ -581,10 +581,10 @@ test_that("add_col_percent returns correct data with column names", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(0, 0, 0, NA),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(NA, NA, NA, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col, from = "c", to = "f"))
@@ -620,11 +620,11 @@ test_that("add_col_percent ignores NAs when na.rm is TRUE", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(1, 2, 3, NA),
-        pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(NA, NA, NA, NA)),
+        cp_b = c(1/6, 2/6, 3/6, 0/6),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(NA, NA, NA, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col_na))
@@ -637,11 +637,11 @@ test_that("add_col_percent ignores NAs when na.rm is TRUE", {
         d = c(3, 1, 2, 0),
         e = c(0, 0, 0, 0),
         f = c(1, 2, 3, NA),
-        pc_b = c(1/6, 2/6, 3/6, 0/6),
-        pc_c = c(2/6, 3/6, 1/6, 0/6),
-        pc_d = c(3/6, 1/6, 2/6, 0/6),
-        pc_e = as.numeric(c(NA, NA, NA, NA)),
-        pc_f = as.numeric(c(1/6, 2/6, 3/6, NA)),
+        cp_b = c(1/6, 2/6, 3/6, 0/6),
+        cp_c = c(2/6, 3/6, 1/6, 0/6),
+        cp_d = c(3/6, 1/6, 2/6, 0/6),
+        cp_e = as.numeric(c(NA, NA, NA, NA)),
+        cp_f = as.numeric(c(1/6, 2/6, 3/6, NA)),
         stringsAsFactors = FALSE)
 
     output <- as.data.frame(add_col_percent(data_col_na, na.rm = TRUE))
