@@ -1,7 +1,7 @@
 Package: cltools
 Type: Package
 Title: A Collection of Data Wrangling Tools for Statistical Researchers.
-Version: 0.6.0
+Version: 0.7.0
 Author: Oliver Hawkins
 Maintainer: Oliver Hawkins <oli@olihawkins.com>
 Description: A collection of data wrangling tools for statistical researchers.
