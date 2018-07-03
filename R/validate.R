@@ -30,8 +30,8 @@ run_dfr_func <- function(f, data, from, to, ...) {
         "The to argument must be a vector of length 1.")
 
     # Convert column names to numbers if necessary
-    if (is.character(from)) from <- get_col_num(data, from)
-    if (is.character(to)) to <- get_col_num(data, to)
+    if (is.character(from)) from <- get_col_nums(data, from)
+    if (is.character(to)) to <- get_col_nums(data, to)
 
     # Check column indices are sane
     if (from < 1 || to > ncol(data) || from > to) stop(
@@ -45,17 +45,17 @@ run_dfr_func <- function(f, data, from, to, ...) {
     f(data, from = from, to = to, ...)
 }
 
-#' Get the column number for a column in a dataframe given its name
+#' Get the column numbers for columns in a dataframe given their names
 #'
 #' @param data A dataframe.
-#' @param name A column name as a string.
-#' @return The column number for the column with the given name, or zero if
-#'   the column name is not found.
+#' @param name A list of column names as strings.
+#' @return The column numbers for the columns with the given names, or zero if
+#'   none of the column names are found.
 #' @keywords internal
 #'
-get_col_num <- function(data, name) {
+get_col_nums <- function(data, names) {
 
-    num <- which(colnames(data) == name)
+    num <- which(colnames(data) %in% names)
     if (identical(num, integer(0))) num <- 0
     num
 }

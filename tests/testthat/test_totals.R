@@ -8,6 +8,13 @@ data <- tibble::tibble(
     c = c(6, 7, 8, 9, 10),
     d = c(11, 12, 13, 14, 15))
 
+data_lcols <- tibble::tibble(
+    a = LETTERS[1:5],
+    b = letters[1:5],
+    c = c(1, 2, 3, 4, 5),
+    d = c(6, 7, 8, 9, 10),
+    e = c(11, 12, 13, 14, 15))
+
 data_na <- tibble::tibble(
     a = LETTERS[1:6],
     b = c(1, 2, 3, 4, 5, 100),
@@ -403,6 +410,19 @@ test_that("add_col_totals returns correct data with column names", {
     expect_equal(output, correct)
 })
 
+test_that("add_col_totals accepts strings as indices for label columns", {
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], "total"),
+        b = c(letters[1:5], "total"),
+        c = c(1, 2, 3, 4, 5, 15),
+        d = c(6, 7, 8, 9, 10, 40),
+        e = c(11, 12, 13, 14, 15, 65))
+
+    output <- add_col_totals(data_lcols, from = "c", lcols = c("a", "b"))
+    expect_equal(output, correct)
+})
+
 test_that("add_col_totals ignores invalid label columns", {
 
     correct <- tibble::tibble(
@@ -426,6 +446,8 @@ test_that("add_col_totals takes a user defined label", {
     output <- add_col_totals(data, label = "Grand Total")
     expect_equal(output, correct)
 })
+
+
 
 test_that("add_col_totals removes labels when lcols is NULL", {
 

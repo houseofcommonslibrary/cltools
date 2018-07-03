@@ -145,6 +145,9 @@ add_col_totals_dfr <- function(data,
                                label = "total",
                                lcols = 1) {
 
+    # Convert label column names to numbers if necessary
+    if (is.character(lcols)) lcols <- get_col_nums(data, lcols)
+
     # Get the column totals as a list for a totals row
     ct_row <- as.list(get_col_totals_dfr(data, from, to, na.rm))
 

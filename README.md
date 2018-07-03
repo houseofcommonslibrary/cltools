@@ -118,7 +118,7 @@ add_col_totals(data)
 # 6 total    15    40    65
 ```
 
-The `lcols` argument can be used to specify which columns should receive the label for totals. 
+The `lcols` argument can be used to specify which columns should receive the label for totals. You can use column numbers or column names.
 
 ``` r
 data <- tibble::tibble(
@@ -148,9 +148,20 @@ add_col_totals(data, from = 3, lcols = c(1, 2))
 # 4 D     i         4     9    14
 # 5 E     j         5    10    15
 # 6 total total    15    40    65
+
+add_col_totals(data, from = 3, lcols = "b")
+# # A tibble: 6 x 5
+#   a     b         c     d     e
+#   <chr> <chr> <dbl> <dbl> <dbl>
+# 1 A     f         1     6    11
+# 2 B     g         2     7    12
+# 3 C     h         3     8    13
+# 4 D     i         4     9    14
+# 5 E     j         5    10    15
+# 6 NA    total    15    40    65
 ```
 
-If the column indices specified with `lcols` are invalid for any reason they will be silently ignored. Similarly, setting `lcols` to `NULL` will stop the function attempting to include any labels in the new row.
+If the column indices specified with `lcols` are invalid for any reason they will be silently ignored - in particular, watch out for columns that are factors rather than strings: `add_col_totals` won't add labels to those. Setting `lcols` to `NULL` will stop the function attempting to include any labels in the new row.
 
 ``` r
 add_col_totals(data, from = "c", lcols = NULL)
