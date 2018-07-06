@@ -103,6 +103,14 @@ get_col_totals(data)
 # 15 40 65 
 ```
 
+You can produce a column total for just a subset of rows by providing a vector of row numbers to the `rows` argument.
+
+``` r
+get_col_totals(data, rows = 1:3)
+#  b  c  d 
+#  6 21 36 
+```
+
 When adding column totals to a dataframe with `add_col_totals`, NAs are used for all columns that are not being summed. However, label columns can be specified so that a label can be used for the row of totals. By default, the function will try to add a label to the first column of the dataframe, if possible.
 
 ``` r
@@ -116,6 +124,21 @@ add_col_totals(data)
 # 4 D         4     9    14
 # 5 E         5    10    15
 # 6 total    15    40    65
+```
+
+As before, you can produce a column total for just a subset of rows by providing a vector of row numbers to the `rows` argument.
+
+``` r
+add_col_totals(data, rows = 1:3, label = "A-C")
+# # A tibble: 6 x 4
+#   a         b     c     d
+#   <chr> <dbl> <dbl> <dbl>
+# 1 A         1     6    11
+# 2 B         2     7    12
+# 3 C         3     8    13
+# 4 D         4     9    14
+# 5 E         5    10    15
+# 6 A-C       6    21    36
 ```
 
 The `lcols` argument can be used to specify which columns should receive the label for totals. You can use column numbers or column names.

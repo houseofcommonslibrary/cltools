@@ -271,6 +271,30 @@ test_that("get_col_totals rejects columns that aren't numeric", {
     expect_error(get_col_totals(data, from = 1), msg)
 })
 
+test_that("get_col_totals rejects rows that aren't numeric", {
+
+    msg <- "The rows argument is not numeric."
+    expect_error(get_col_totals(data, rows = NULL), msg)
+    expect_error(get_col_totals(data, rows = c(NA, NA, NA)), msg)
+    expect_error(get_col_totals(data, rows = c("a", "b", "c")), msg)
+    expect_error(get_col_totals(data, rows = c(TRUE, TRUE, FALSE)), msg)
+    expect_error(get_col_totals(data, rows = list(a = c(1,2,3))), msg)
+})
+
+test_that("get_col_totals warns of duplicates in rows", {
+
+    msg <- "Duplicates in the rows argument were ignored."
+    expect_warning(get_col_totals(data, rows = c(1, 1, 2, 3)), msg)
+})
+
+test_that("get_col_totals warns of out of range row numbers in rows", {
+
+    msg <- "Out of range row numbers in the rows argument were ignored."
+    expect_warning(get_col_totals(data, rows = c(-1, 1)), msg)
+    expect_warning(get_col_totals(data, rows = c(0, 5)), msg)
+    expect_warning(get_col_totals(data, rows = c(1, 6)), msg)
+})
+
 test_that("get_col_totals returns correct data with defaults", {
 
     correct <- c(b = 15, c = 40, d = 65)
@@ -296,6 +320,21 @@ test_that("get_col_totals returns correct data with column names", {
 
     correct <- c(c = 40, d = 65)
     output <- get_col_totals(data, from = "c", to = "d")
+    expect_equal(output, correct)
+})
+
+test_that("get_col_totals returns correct data for a subset of rows", {
+
+    correct <- c(b = 3, c = 13, d = 23)
+    output <- get_col_totals(data, rows = c(1, 2))
+    expect_equal(output, correct)
+
+    correct <- c(b = 9, c = 24, d = 39)
+    output <- get_col_totals(data, rows = c(1, 3, 5))
+    expect_equal(output, correct)
+
+    correct <- c(b = 12, c = 27, d = 42)
+    output <- get_col_totals(data, rows = 3:5)
     expect_equal(output, correct)
 })
 
@@ -349,6 +388,30 @@ test_that("add_col_totals rejects columns that aren't numeric", {
 
     msg <- "The given columns are not all numeric."
     expect_error(add_col_totals(data, from = 1), msg)
+})
+
+test_that("add_col_totals rejects rows that aren't numeric", {
+
+    msg <- "The rows argument is not numeric."
+    expect_error(add_col_totals(data, rows = NULL), msg)
+    expect_error(add_col_totals(data, rows = c(NA, NA, NA)), msg)
+    expect_error(add_col_totals(data, rows = c("a", "b", "c")), msg)
+    expect_error(add_col_totals(data, rows = c(TRUE, TRUE, FALSE)), msg)
+    expect_error(add_col_totals(data, rows = list(a = c(1,2,3))), msg)
+})
+
+test_that("add_col_totals warns of duplicates in rows", {
+
+    msg <- "Duplicates in the rows argument were ignored."
+    expect_warning(add_col_totals(data, rows = c(1, 1, 2, 3)), msg)
+})
+
+test_that("add_col_totals warns of out of range row numbers in rows", {
+
+    msg <- "Out of range row numbers in the rows argument were ignored."
+    expect_warning(add_col_totals(data, rows = c(-1, 1)), msg)
+    expect_warning(add_col_totals(data, rows = c(0, 5)), msg)
+    expect_warning(add_col_totals(data, rows = c(1, 6)), msg)
 })
 
 test_that("add_col_totals returns correct data with defaults", {
@@ -410,6 +473,36 @@ test_that("add_col_totals returns correct data with column names", {
     expect_equal(output, correct)
 })
 
+test_that("add_col_totals returns correct data for a subset of rows", {
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], "total"),
+        b = c(1, 2, 3, 4, 5, 3),
+        c = c(6, 7, 8, 9, 10, 13),
+        d = c(11, 12, 13, 14, 15, 23))
+
+    output <- add_col_totals(data, rows = c(1, 2))
+    expect_equal(output, correct)
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], "total"),
+        b = c(1, 2, 3, 4, 5, 9),
+        c = c(6, 7, 8, 9, 10, 24),
+        d = c(11, 12, 13, 14, 15, 39))
+
+    output <- add_col_totals(data, rows = c(1, 3, 5))
+    expect_equal(output, correct)
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], "subtotal"),
+        b = c(1, 2, 3, 4, 5, 12),
+        c = c(6, 7, 8, 9, 10, 27),
+        d = c(11, 12, 13, 14, 15, 42))
+
+    output <- add_col_totals(data, rows = 3:5, label = "subtotal")
+    expect_equal(output, correct)
+})
+
 test_that("add_col_totals accepts strings as indices for label columns", {
 
     correct <- tibble::tibble(
@@ -420,6 +513,16 @@ test_that("add_col_totals accepts strings as indices for label columns", {
         e = c(11, 12, 13, 14, 15, 65))
 
     output <- add_col_totals(data_lcols, from = "c", lcols = c("a", "b"))
+    expect_equal(output, correct)
+
+    correct <- tibble::tibble(
+        a = c(LETTERS[1:5], NA),
+        b = c(letters[1:5], "total"),
+        c = c(1, 2, 3, 4, 5, 15),
+        d = c(6, 7, 8, 9, 10, 40),
+        e = c(11, 12, 13, 14, 15, 65))
+
+    output <- add_col_totals(data_lcols, from = 3, lcols = c("b"))
     expect_equal(output, correct)
 })
 
@@ -432,6 +535,9 @@ test_that("add_col_totals ignores invalid label columns", {
         d = c(11, 12, 13, 14, 15, 65))
 
     output <- add_col_totals(data, lcols = c(-1, 1, 2, 5))
+    expect_equal(output, correct)
+
+    output <- add_col_totals(data, lcols = c("-", "a", "b", "e"))
     expect_equal(output, correct)
 })
 
@@ -446,8 +552,6 @@ test_that("add_col_totals takes a user defined label", {
     output <- add_col_totals(data, label = "Grand Total")
     expect_equal(output, correct)
 })
-
-
 
 test_that("add_col_totals removes labels when lcols is NULL", {
 

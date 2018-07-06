@@ -4,8 +4,8 @@
 \alias{add_col_totals_dfr}
 \title{Add column totals for a set of columns in a dataframe without validation}
 \usage{
-add_col_totals_dfr(data, from = 2, to = ncol(data), na.rm = FALSE,
-  label = "total", lcols = 1)
+add_col_totals_dfr(data, from = 2, to = ncol(data), rows = 1:nrow(data),
+  na.rm = FALSE, label = "total", lcols = 1)
 }
 \description{
 This is the raw version of \code{add_col_totals}. It should only be used
