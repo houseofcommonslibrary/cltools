@@ -5,7 +5,9 @@ Version: 0.8.1
 Author: Oliver Hawkins
 Maintainer: Oliver Hawkins <oli@olihawkins.com>
 Description: A collection of data wrangling tools for statistical researchers.
-    This packages provides simple ways to perform common data wrangling tasks.
+    This packages provides simple ways to perform common data wrangling tasks, 
+    such as creating column and row totals, column and row percentages,
+    statisitcal indices, and deflated series.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
