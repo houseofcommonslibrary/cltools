@@ -1,12 +1,12 @@
 Package: cltools
 Type: Package
-Title: A Collection of Data Wrangling Tools for Statistical Researchers.
-Version: 0.8.0
+Title: A Collection of Data Wrangling Tools for Statistical Researchers
+Version: 0.8.1
 Author: Oliver Hawkins
 Maintainer: Oliver Hawkins <oli@olihawkins.com>
 Description: A collection of data wrangling tools for statistical researchers.
     This packages provides simple ways to perform common data wrangling tasks.
-License: MIT
+License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
@@ -15,4 +15,4 @@ Imports:
 	purrr,
 	tibble
 Suggests: testthat
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
