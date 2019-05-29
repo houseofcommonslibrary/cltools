@@ -12,7 +12,7 @@
 #'   "desc". If \code{by} is "value" the default \code{order} is "asc".
 #' @param name The column name to use for the values column in the results as
 #'   a string. By default, the variable name of the input vector is used.
-#' @param na.rm A boolean indicating whether to exclude NAs from the result.
+#' @param na.rm A boolean indicating whether to exclude NAs from the results.
 #'   The default is FALSE.
 #' @return A tibble showing the frequency of each value in the input vector.
 #' @export
