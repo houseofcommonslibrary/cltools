@@ -4,14 +4,14 @@
 #' figures as a tibble. The results can be sorted by value or by count.
 #'
 #' @param values A vector of values from which frequencies will be calculated.
-#' @param name The column name to use for the values column in the results. By
-#'   default, the variable name of the input vector is used.
 #' @param by The column by which to sort the results. Must be one of either
 #'   "count" or "value". The default is "count".
 #' @param order The order in which to sort the results. Must be one of either
 #'   "asc" or "desc". The default depends on the value of the \code{by}
 #'   argument. If \code{by} is "count" the default \code{order} is "desc". If
 #'   \code{by} is "value" the default \code{order} is "asc".
+#' @param name The column name to use for the values column in the results. By
+#'   default, the variable name of the input vector is used.
 #' @return A tibble showing the frequency of each value in the input vector.
 #' @export
 
