@@ -1,7 +1,7 @@
 Package: cltools
 Type: Package
 Title: A Collection of Data Wrangling Tools for Statistical Researchers
-Version: 0.8.1
+Version: 0.9.0
 Author: Oliver Hawkins
 Maintainer: Oliver Hawkins <oli@olihawkins.com>
 Description: A collection of data wrangling tools for statistical researchers.
@@ -15,6 +15,8 @@ Imports:
     dplyr,
 	magrittr,
 	purrr,
+	rlang,
+	stringr,
 	tibble
 Suggests: testthat
 RoxygenNote: 6.1.1

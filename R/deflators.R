@@ -13,7 +13,7 @@
 #'   default value is the index of the last value in the series, which is
 #'   assumed to be the most recent period.
 #' @return The deflated data series as a numeric vector.
-#'
+
 deflate <- function(data, deflator, basepos = length(data)) {
 
     # Check data and deflator are both numeric
@@ -51,7 +51,7 @@ deflate <- function(data, deflator, basepos = length(data)) {
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_real_dfr <- function(data,
                          deflator,
                          from = 2,
@@ -119,7 +119,7 @@ get_real_dfr <- function(data,
 #'   dataframe, which is assumed to be the most recent period.
 #' @return A tibble containing real terms series and any preceding columns.
 #' @export
-#'
+
 get_real <- function(data,
                      deflator,
                      from = 2,
@@ -141,7 +141,7 @@ get_real <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_real_dfr <- function(data,
                          deflator,
                          from = 2,
@@ -194,7 +194,7 @@ add_real_dfr <- function(data,
 #'   index equivalents. The default is "ix_".
 #' @return A tibble containing real terms series and any preceding columns.
 #' @export
-#'
+
 add_real <- function(data,
                      deflator,
                      from = 2,

@@ -22,7 +22,7 @@ calculated across all remaining columms in the dataframe.}
 default value is FALSE.}
 }
 \value{
-A numeric vetor of row totals
+A numeric vector of row totals.
 }
 \description{
 Calculates row totals for a set of columns in a dataframe and returns them

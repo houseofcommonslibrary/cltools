@@ -18,7 +18,7 @@
 #'   must not be zero.
 #' @return A vector containing the created index.
 #' @export
-#'
+
 get_index <- function(data, base = 100, basepos = 1, baseval = NULL) {
 
     # Check the vector is numeric
@@ -82,7 +82,7 @@ get_index <- function(data, base = 100, basepos = 1, baseval = NULL) {
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_indices_dfr <- function(data,
                         from = 2,
                         to = ncol(data),
@@ -175,7 +175,7 @@ get_indices_dfr <- function(data,
 #'   values must not contain zeros.
 #' @return A tibble containing indices and any preceding columns.
 #' @export
-#'
+
 get_indices <- function(data,
                         from = 2,
                         to = ncol(data),
@@ -193,7 +193,7 @@ get_indices <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_indices_dfr <- function(data,
                             from = 2,
                             to = ncol(data),
@@ -251,7 +251,7 @@ add_indices_dfr <- function(data,
 #' @return The input data with additional columns containing indices for
 #'   columns specified by \code{from} and \code{to}.
 #' @export
-#'
+
 add_indices <- function(data,
                         from = 2,
                         to = ncol(data),

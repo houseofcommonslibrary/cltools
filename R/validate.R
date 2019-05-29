@@ -14,7 +14,7 @@
 #' @param to The end column: either and index or name.
 #' @return The return value of the function.
 #' @keywords internal
-#'
+
 run_dfr_func <- function(f, data, from, to, ...) {
 
     # Check data is a dataframe
@@ -52,7 +52,7 @@ run_dfr_func <- function(f, data, from, to, ...) {
 #' @return The column numbers for the columns with the given names, or zero if
 #'   none of the column names are found.
 #' @keywords internal
-#'
+
 get_col_nums <- function(data, names) {
 
     num <- which(colnames(data) %in% names)

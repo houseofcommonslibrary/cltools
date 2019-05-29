@@ -4,7 +4,7 @@
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_row_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
@@ -31,9 +31,9 @@ get_row_totals_dfr <- function(data,
 #'   calculated across all remaining columms in the dataframe.
 #' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
 #'   default value is FALSE.
-#' @return A numeric vetor of row totals
+#' @return A numeric vector of row totals.
 #' @export
-#'
+
 get_row_totals <- function(data,
                            from = 2,
                            to = ncol(data),
@@ -48,7 +48,7 @@ get_row_totals <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_row_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
@@ -77,7 +77,7 @@ add_row_totals_dfr <- function(data,
 #' @param label The label for the totals column. The default is "total".
 #' @return A tibble containing row totals and any preceding columns.
 #' @export
-#'
+
 add_row_totals <- function(data,
                            from = 2,
                            to = ncol(data),
@@ -93,7 +93,7 @@ add_row_totals <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_col_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
@@ -142,9 +142,9 @@ get_col_totals_dfr <- function(data,
 #'   all rows in the dataframe.
 #' @param na.rm A boolean which if TRUE ignores NAs in calculating totals. The
 #'   default value is FALSE.
-#' @return A numeric vetor of column totals
+#' @return A numeric vector of column totals.
 #' @export
-#'
+
 get_col_totals <- function(data,
                            from = 2,
                            to = ncol(data),
@@ -160,7 +160,7 @@ get_col_totals <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_col_totals_dfr <- function(data,
                                from = 2,
                                to = ncol(data),
@@ -221,7 +221,7 @@ add_col_totals_dfr <- function(data,
 #' @return A tibble containing the input dataframe with an additional row for
 #'   column totals.
 #' @export
-#'
+
 add_col_totals <- function(data,
                            from = 2,
                            to = ncol(data),

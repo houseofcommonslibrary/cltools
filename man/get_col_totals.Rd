@@ -26,7 +26,7 @@ all rows in the dataframe.}
 default value is FALSE.}
 }
 \value{
-A numeric vetor of column totals
+A numeric vector of column totals.
 }
 \description{
 Calculates column totals for a set of columns in a dataframe and returns
