@@ -1,4 +1,4 @@
-#' Counts the frequency of discrete values in a vector
+#' Count the frequency of discrete values in a vector
 #'
 #' Calculates the frequency of discrete values in a vector and returns the
 #' figures as a tibble. The results can be sorted by value or by count.
