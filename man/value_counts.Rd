@@ -2,29 +2,32 @@
 % Please edit documentation in R/counts.R
 \name{value_counts}
 \alias{value_counts}
-\title{Counts the frequency of discrete values in a vector}
+\title{Count the frequency of discrete values in a vector}
 \usage{
-value_counts(values, by = "count", order = ifelse(by == "value", "asc",
-  "desc"), name = deparse(substitute(values)))
+value_counts(values, name = NULL, by = "count", order = ifelse(by ==
+  "value", "asc", "desc"), na.rm = FALSE)
 }
 \arguments{
 \item{values}{A vector of values from which frequencies will be calculated.}
 
-\item{by}{The column by which to sort the results. Must be one of either
-"count" or "value". The default is "count".}
+\item{name}{The column name to use for the values column in the results as
+a string. By default, the variable name of the input vector is used.}
 
-\item{order}{The order in which to sort the results. Must be one of either
-"asc" or "desc". The default depends on the value of the \code{by}
-argument. If \code{by} is "count" the default \code{order} is "desc". If
-\code{by} is "value" the default \code{order} is "asc".}
+\item{by}{The column name by which to sort the results as a string. Must be
+one of either "count" or "value". The default is "count".}
 
-\item{name}{The column name to use for the values column in the results. By
-default, the variable name of the input vector is used.}
+\item{order}{The order in which to sort the results as a string. Must be
+one of either "asc" or "desc". The default depends on the value of the
+\code{by} argument. If \code{by} is "count" the default \code{order} is
+"desc". If \code{by} is "value" the default \code{order} is "asc".}
+
+\item{na.rm}{A boolean indicating whether to exclude NAs from the results.
+The default is FALSE.}
 }
 \value{
 A tibble showing the frequency of each value in the input vector.
 }
 \description{
 Calculates the frequency of discrete values in a vector and returns the
-figures as a tibble. The results can be sorted by value or by count.
+counts as a tibble. The results can be sorted by value or by count.
 }
