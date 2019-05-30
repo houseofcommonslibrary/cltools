@@ -40,7 +40,7 @@ value_counts <- function(
         stop(stringr::str_c("object '", obj_name, "' is empty"))
     }
 
-    # If name is not provided get the variable name
+    # If name is not provided use the variable name
     if (is.null(name)) {
         name <- obj_name
     }
