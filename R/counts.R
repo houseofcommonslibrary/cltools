@@ -6,12 +6,12 @@
 #' @param values A vector of values from which frequencies will be calculated.
 #' @param by The column name by which to sort the results as a string. Must be
 #'   one of either "count" or "value". The default is "count".
+#' @param name The column name to use for the values column in the results as
+#'   a string. By default, the variable name of the input vector is used.
 #' @param order The order in which to sort the results as a string. Must be
 #'   one of either "asc" or "desc". The default depends on the value of the
 #'   \code{by} argument. If \code{by} is "count" the default \code{order} is
 #'   "desc". If \code{by} is "value" the default \code{order} is "asc".
-#' @param name The column name to use for the values column in the results as
-#'   a string. By default, the variable name of the input vector is used.
 #' @param na.rm A boolean indicating whether to exclude NAs from the results.
 #'   The default is FALSE.
 #' @return A tibble showing the frequency of each value in the input vector.
@@ -19,12 +19,33 @@
 
 value_counts <- function(
     values,
+    name = NULL,
     by = "count",
     order = ifelse(by == "value", "asc", "desc"),
-    name = deparse(substitute(values)),
     na.rm = FALSE) {
 
-    # Check arguments are valid
+    # Get the variable name of the values argument
+    obj_name <- deparse(substitute(values))
+
+    # Check the values argument is not null and is a vector
+    if (is.null(values)) {
+        stop(stringr::str_c("object '", obj_name, "' not found"))
+    }
+
+    if (! is.atomic(values)) {
+        stop(stringr::str_c("object '", obj_name, "' is not an atomic vector"))
+    }
+
+    if (length(values) == 0) {
+        stop(stringr::str_c("object '", obj_name, "' is empty"))
+    }
+
+    # If name is not provided get the variable name
+    if (is.null(name)) {
+        name <- obj_name
+    }
+
+    # Check the sort arguments are valid
     if (! by %in% c("count", "value")) {
         stop("Invalid \"by\" argument. Must be either \"count\" or \"value\".")
     }
@@ -33,13 +54,9 @@ value_counts <- function(
         stop("Invalid \"by\" argument. Must be either \"asc\" or \"desc\".")
     }
 
+    # Check the na.rm argument is valid
     if (! is.logical(na.rm)) {
         stop("Invalid \"na.rm\" argument. Must be either TRUE or FALSE.")
-    }
-
-    # If the name is a dataframe column name, extract the column name
-    if (stringr::str_detect(name, "\\$")) {
-        name <- stringr::str_sub(stringr::str_extract(name, "\\$.*$"), 2)
     }
 
     # Set the sort properties for the call to arrange

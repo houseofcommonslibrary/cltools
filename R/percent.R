@@ -5,7 +5,7 @@
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_row_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
@@ -45,7 +45,7 @@ get_row_percent_dfr <- function(data,
 #'   percentages. The default value is FALSE.
 #' @return A tibble containing row percentages and any preceding columns.
 #' @export
-#'
+
 get_row_percent <- function(data,
                             from = 2,
                             to = ncol(data),
@@ -61,7 +61,7 @@ get_row_percent <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_row_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
@@ -100,7 +100,7 @@ add_row_percent_dfr <- function(data,
 #' @return The input data with additional columns containing row percentages
 #'   for columns specified by \code{from} and \code{to}.
 #' @export
-#'
+
 add_row_percent <- function(data,
                             from = 2,
                             to = ncol(data),
@@ -117,7 +117,7 @@ add_row_percent <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 get_col_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
@@ -157,7 +157,7 @@ get_col_percent_dfr <- function(data,
 #'   percentages. The default value is FALSE.
 #' @return A tibble containing column percentages and any preceding columns.
 #' @export
-#'
+
 get_col_percent <- function(data,
                             from = 2,
                             to = ncol(data),
@@ -173,7 +173,7 @@ get_col_percent <- function(data,
 #' internally within the package inside functions which provide validation.
 #'
 #' @keywords internal
-#'
+
 add_col_percent_dfr <- function(data,
                                 from = 2,
                                 to = ncol(data),
@@ -212,7 +212,7 @@ add_col_percent_dfr <- function(data,
 #' @return The input data with additional columns containing column
 #'   percentages for columns specified by \code{from} and \code{to}.
 #' @export
-#'
+
 add_col_percent <- function(data,
                             from = 2,
                             to = ncol(data),
