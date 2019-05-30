@@ -4,10 +4,10 @@
 #' counts as a tibble. The results can be sorted by value or by count.
 #'
 #' @param values A vector of values from which frequencies will be calculated.
-#' @param by The column name by which to sort the results as a string. Must be
-#'   one of either "count" or "value". The default is "count".
 #' @param name The column name to use for the values column in the results as
 #'   a string. By default, the variable name of the input vector is used.
+#' @param by The column name by which to sort the results as a string. Must be
+#'   one of either "count" or "value". The default is "count".
 #' @param order The order in which to sort the results as a string. Must be
 #'   one of either "asc" or "desc". The default depends on the value of the
 #'   \code{by} argument. If \code{by} is "count" the default \code{order} is
