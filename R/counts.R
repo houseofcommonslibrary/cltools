@@ -28,16 +28,27 @@ value_counts <- function(
     obj_name <- deparse(substitute(values))
 
     # Check the values argument is not null and is a vector
-    if (is.null(values)) {
-        stop(stringr::str_c("object '", obj_name, "' not found"))
+    if (is.null(values) || ! is.atomic(values)) {
+        stop("The values argument is not a vector.")
     }
 
-    if (! is.atomic(values)) {
-        stop(stringr::str_c("object '", obj_name, "' is not an atomic vector"))
-    }
-
+    # Check the values argument is not an empty factor
     if (length(values) == 0) {
-        stop(stringr::str_c("object '", obj_name, "' is empty"))
+        stop("The values argument is empty.")
+    }
+
+    # Check the sort arguments are valid
+    if (length(by) != 1 || ! by %in% c("count", "value")) {
+        stop("Invalid \"by\" argument. Must be either \"count\" or \"value\".")
+    }
+
+    if (length(order) != 1 || ! order %in% c("asc", "desc")) {
+        stop("Invalid \"order\" argument. Must be either \"asc\" or \"desc\".")
+    }
+
+    # Check the na.rm argument is valid
+    if (is.na(na.rm) || ! is.logical(na.rm)) {
+        stop("Invalid \"na.rm\" argument. Must be either TRUE or FALSE.")
     }
 
     # If name is not provided use the variable name
@@ -45,18 +56,9 @@ value_counts <- function(
         name <- obj_name
     }
 
-    # Check the sort arguments are valid
-    if (! by %in% c("count", "value")) {
-        stop("Invalid \"by\" argument. Must be either \"count\" or \"value\".")
-    }
-
-    if (! order %in% c("asc", "desc")) {
-        stop("Invalid \"by\" argument. Must be either \"asc\" or \"desc\".")
-    }
-
-    # Check the na.rm argument is valid
-    if (! is.logical(na.rm)) {
-        stop("Invalid \"na.rm\" argument. Must be either TRUE or FALSE.")
+    # Check the name argument is valid
+    if (length(name) != 1 || is.na(name) || ! is.atomic(values)) {
+        stop("Invalid \"name\" argument. Must be a string.")
     }
 
     # Set the sort properties for the call to arrange
