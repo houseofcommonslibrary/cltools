@@ -4,7 +4,7 @@ A collection of data wrangling tools for statistical researchers. This package i
 
 The package provides functions for manipulating tabular data stored in dataframes. It is desgined to make it easier to perform routine transformations of data that researchers often use, but which can be error prone when done in Excel, especially with larger datasets. An experienced R user could accomplish most of these operations directly without much difficulty, but a design goal of this package is to make it easier for researchers to be productive with R at lower levels of expertise.
 
-This package is in active development and I would welcome any feedback. The currently available API is set out in the [contents](https://github.com/olihawkins/cltools#contents) below. Any functions documented here are ready to use: they have good test coverage and documentation. Further functions may be added over time. I cannot currently guarantee there will be no breaking changes to the API in future, as the package is new and may evolve in response to feedback from users. However, functions documented in this README are less likely to change than those in development.
+This package is in active development and I would welcome any feedback. The currently available API is set out in the [contents](https://github.com/houseofcommonslibrary/cltools#contents) below. Any functions documented here are ready to use: they have good test coverage and documentation. Further functions may be added over time. I cannot currently guarantee there will be no breaking changes to the API in future, as the package is new and may evolve in response to feedback from users. However, functions documented in this README are less likely to change than those in development.
 
 ## Installation
 
@@ -12,17 +12,17 @@ Install from GitHub using devtools.
 
 ``` r
 install.packages("devtools")
-devtools::install_github("olihawkins/cltools")
+remotes::install_github("houseofcommonslibrary/cltools")
 ```
 
 ## Contents
 
-* [Core principles](https://github.com/olihawkins/cltools#core-principles)
-* [Row and column totals](https://github.com/olihawkins/cltools#row-and-column-totals)
-* [Row and column percentages](https://github.com/olihawkins/cltools#row-and-column-percentages)
-* [Missing values](https://github.com/olihawkins/cltools#missing-values)
-* [Statistical indices](https://github.com/olihawkins/cltools#statistical-indices)
-* [Deflators and real terms series](https://github.com/olihawkins/cltools#deflators-and-real-terms-series)
+* [Core principles](https://github.com/houseofcommonslibrary/cltools#core-principles)
+* [Row and column totals](https://github.com/houseofcommonslibrary/cltools#row-and-column-totals)
+* [Row and column percentages](https://github.com/houseofcommonslibrary/cltools#row-and-column-percentages)
+* [Missing values](https://github.com/houseofcommonslibrary/cltools#missing-values)
+* [Statistical indices](https://github.com/houseofcommonslibrary/cltools#statistical-indices)
+* [Deflators and real terms series](https://github.com/houseofcommonslibrary/cltools#deflators-and-real-terms-series)
 
 ### Core principles
 
