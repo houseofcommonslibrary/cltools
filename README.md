@@ -11,7 +11,7 @@ This package is in active development and I would welcome any feedback. The curr
 Install from GitHub using devtools.
 
 ``` r
-install.packages("devtools")
+install.packages("remotes")
 remotes::install_github("houseofcommonslibrary/cltools")
 ```
 
