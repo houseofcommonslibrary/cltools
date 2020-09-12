@@ -4,8 +4,13 @@
 \alias{get_col_totals}
 \title{Get column totals for a set of columns in a dataframe}
 \usage{
-get_col_totals(data, from = 2, to = ncol(data), rows = 1:nrow(data),
-  na.rm = FALSE)
+get_col_totals(
+  data,
+  from = 2,
+  to = ncol(data),
+  rows = 1:nrow(data),
+  na.rm = FALSE
+)
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be

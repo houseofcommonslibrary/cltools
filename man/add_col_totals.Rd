@@ -4,8 +4,15 @@
 \alias{add_col_totals}
 \title{Add column totals for a set of columns in a dataframe}
 \usage{
-add_col_totals(data, from = 2, to = ncol(data), rows = 1:nrow(data),
-  na.rm = FALSE, label = "total", lcols = 1)
+add_col_totals(
+  data,
+  from = 2,
+  to = ncol(data),
+  rows = 1:nrow(data),
+  na.rm = FALSE,
+  label = "total",
+  lcols = 1
+)
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be

@@ -5,8 +5,7 @@
 \title{Calculate row percentages for a set of columns in a dataframe and add
 them to the dataframe}
 \usage{
-add_row_percent(data, from = 2, to = ncol(data), na.rm = FALSE,
-  prefix = "rp_")
+add_row_percent(data, from = 2, to = ncol(data), na.rm = FALSE, prefix = "rp_")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be

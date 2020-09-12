@@ -2,8 +2,12 @@ Package: cltools
 Type: Package
 Title: A Collection of Data Wrangling Tools for Statistical Researchers
 Version: 0.9.2
-Author: Oliver Hawkins
-Maintainer: Oliver Hawkins <oli@olihawkins.com>
+Authors@R: 
+    person(
+        given = "Oliver",
+        family = "Hawkins",
+        role = c("aut", "cre"),
+        email = "oli@olihawkins.com")
 Description: A collection of data wrangling tools for statistical researchers.
     This packages provides simple ways to perform common data wrangling tasks, 
     such as creating column and row totals, column and row percentages,
@@ -19,4 +23,4 @@ Imports:
 	stringr,
 	tibble
 Suggests: testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1

@@ -5,8 +5,7 @@
 \title{Create real terms series from columns in a dataframe given a deflator
 series and a baseline row}
 \usage{
-get_real(data, deflator, from = 2, to = ncol(data),
-  baserow = nrow(data))
+get_real(data, deflator, from = 2, to = ncol(data), baserow = nrow(data))
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be

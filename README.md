@@ -1,6 +1,6 @@
 # cltools
 
-A collection of data wrangling tools for statistical researchers. This package is principally designed for use by researchers in the House of Commons Library but may be useful to anyone using R for routine data analysis.
+A collection of data wrangling tools for statistical researchers. This package is principally designed for use by researchers in the House of Commons Library but may be useful to anyone using R for routine data analysis and statistical reporting.
 
 The package provides functions for manipulating tabular data stored in dataframes. It is desgined to make it easier to perform routine transformations of data that researchers often use, but which can be error prone when done in Excel, especially with larger datasets. An experienced R user could accomplish most of these operations directly without much difficulty, but a design goal of this package is to make it easier for researchers to be productive with R at lower levels of expertise.
 
@@ -8,7 +8,7 @@ This package is in active development and I would welcome any feedback. The curr
 
 ## Installation
 
-Install from GitHub using devtools.
+Install from GitHub using remotes.
 
 ``` r
 install.packages("remotes")
@@ -23,6 +23,7 @@ remotes::install_github("houseofcommonslibrary/cltools")
 * [Missing values](https://github.com/houseofcommonslibrary/cltools#missing-values)
 * [Statistical indices](https://github.com/houseofcommonslibrary/cltools#statistical-indices)
 * [Deflators and real terms series](https://github.com/houseofcommonslibrary/cltools#deflators-and-real-terms-series)
+* [Value counts](https://github.com/houseofcommonslibrary/cltools#value-counts)
 
 ### Core principles
 
@@ -616,3 +617,71 @@ deflate(data, deflator)
 deflate(data, deflator, basepos = 3)
 # [1] 212.7217 222.2952 240.0000 251.1825 259.4581
 ```
+
+### Value counts
+
+The package provides a function called `value_counts` which returns the frequency of discrete values in a vector. This is based on the function with the same name in [pandas](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.value_counts.html), but it has some differences. Pass a vector of values to the function and it returns the absolute and percentage frequencies of the values as a dataframe.
+
+``` r
+some_values <- rep(LETTERS[1:3], 1:3)
+
+some_values
+# [1] "A" "B" "B" "C" "C" "C"
+
+value_counts(some_values)
+# # A tibble: 3 x 3
+#   some_values count percent
+#   <chr>       <int>   <dbl>
+# 1 C               3   0.5  
+# 2 B               2   0.333
+# 3 A               1   0.167
+```
+
+The name of the vector is used as the column name for the values, but this can be changed with the `name` argument.
+
+``` r
+value_counts(some_values, name = "capital_letters")
+# # A tibble: 3 x 3
+#   capital_letters count percent
+#   <chr>           <int>   <dbl>
+# 1 C                   3   0.5  
+# 2 B                   2   0.333
+# 3 A                   1   0.167
+```
+
+The dataframe of results is sorted by count in descending order. You can control whether to sort by value or count using the `by` argument, which can be either `value` or `count`. You can control the direction of the sort with the `order` argument, which can be either `asc` or `desc`.
+
+``` r
+value_counts(some_values, by = "value", order = "asc")
+# # A tibble: 3 x 3
+#   some_values count percent
+#   <chr>       <int>   <dbl>
+# 1 A               1   0.167
+# 2 B               2   0.333
+# 3 C               3   0.5 
+```
+
+You can optionally exclude `NA` values with the `na.rm` argument.
+
+``` r
+some_values <- c(some_values, NA)
+
+values_count(some_values)
+# # A tibble: 4 x 3
+#   some_values count percent
+#   <chr>       <int>   <dbl>
+# 1 C               3   0.429
+# 2 B               2   0.286
+# 3 A               1   0.143
+# 4 NA              1   0.143
+
+value_counts(some_values, na.rm = TRUE)
+# # A tibble: 3 x 3
+#   some_values count percent
+#   <chr>       <int>   <dbl>
+# 1 C               3   0.5  
+# 2 B               2   0.333
+# 3 A               1   0.167
+```
+
+

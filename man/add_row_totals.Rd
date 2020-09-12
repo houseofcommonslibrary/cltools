@@ -4,8 +4,7 @@
 \alias{add_row_totals}
 \title{Add row totals for a set of columns in a dataframe}
 \usage{
-add_row_totals(data, from = 2, to = ncol(data), na.rm = FALSE,
-  label = "total")
+add_row_totals(data, from = 2, to = ncol(data), na.rm = FALSE, label = "total")
 }
 \arguments{
 \item{data}{A dataframe containing columns of numerical data to be

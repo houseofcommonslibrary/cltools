@@ -4,8 +4,13 @@
 \alias{value_counts}
 \title{Count the frequency of discrete values in a vector}
 \usage{
-value_counts(values, name = NULL, by = "count", order = ifelse(by ==
-  "value", "asc", "desc"), na.rm = FALSE)
+value_counts(
+  values,
+  name = NULL,
+  by = "count",
+  order = ifelse(by == "value", "asc", "desc"),
+  na.rm = FALSE
+)
 }
 \arguments{
 \item{values}{A vector of values from which frequencies will be calculated.}

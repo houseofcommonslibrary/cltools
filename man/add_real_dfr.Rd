@@ -5,8 +5,14 @@
 \title{Create real terms series from columns in a dataframe given a deflator
 series and a baseline row and add them to the dataframe without validation}
 \usage{
-add_real_dfr(data, deflator, from = 2, to = ncol(data),
-  baserow = nrow(data), prefix = "rt_")
+add_real_dfr(
+  data,
+  deflator,
+  from = 2,
+  to = ncol(data),
+  baserow = nrow(data),
+  prefix = "rt_"
+)
 }
 \description{
 This is the raw version of \code{add_real}. It should only be used

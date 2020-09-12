@@ -4,8 +4,13 @@
 \alias{get_col_totals_dfr}
 \title{Get column totals for a set of columns in a dataframe without validation}
 \usage{
-get_col_totals_dfr(data, from = 2, to = ncol(data),
-  rows = 1:nrow(data), na.rm = FALSE)
+get_col_totals_dfr(
+  data,
+  from = 2,
+  to = ncol(data),
+  rows = 1:nrow(data),
+  na.rm = FALSE
+)
 }
 \description{
 This is the raw version of \code{get_col_totals}. It should only be used

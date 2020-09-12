@@ -5,8 +5,7 @@
 \title{Create real terms series from columns in a dataframe given a deflator
 series and a baseline row without validation}
 \usage{
-get_real_dfr(data, deflator, from = 2, to = ncol(data),
-  baserow = nrow(data))
+get_real_dfr(data, deflator, from = 2, to = ncol(data), baserow = nrow(data))
 }
 \description{
 This is the raw version of \code{get_real}. It should only be used
