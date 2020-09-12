@@ -1,7 +1,7 @@
 Package: cltools
 Type: Package
 Title: A Collection of Data Wrangling Tools for Statistical Researchers
-Version: 0.9.2
+Version: 1.0.0
 Authors@R: 
     person(
         given = "Oliver",
